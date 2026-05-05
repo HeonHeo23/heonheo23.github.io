@@ -1,0 +1,213 @@
+# Semantic Event Mapping of New Testament Narrative  
+## A Computational Study of the Gospel of Mark Using Semantic Role Labeling
+
+---
+
+## Abstract
+
+This project proposes a computational semantic analysis of the Gospel of Mark, using semantic role labeling and event extraction to construct a comprehensive event map of the narrative. The main objective is to identify and formalize all narrative relevant events, together with their participants, roles, and basic discourse relations, in an academic English translation of Mark.
+
+The study will proceed in three stages. First, a conceptual framework will be defined for representing New Testament narrative events in terms of predicate argument structure. Second, a pilot implementation will apply transformer based semantic role labeling to Mark, yielding a structured event inventory with event types and canonical participants. Third, the resulting event map will be used to explore narrative patterns such as character activity profiles, event type distributions, and computationally inferred episode boundaries.
+
+The project is designed primarily for the field of computational linguistics, but it also lays a foundation for later theological and literary analysis by providing a formal representation of narrative action in a key New Testament text.
+
+---
+
+## 1. Introduction
+
+Recent advances in semantic role labeling and event extraction have made it possible to derive predicate argument structures and event representations automatically from natural language text. At the same time, narrative criticism of the New Testament continues to emphasize the importance of events, characters, and plot for interpretation, especially in the Gospel of Mark. However, the link between computational semantic models and biblical narrative has not yet been explored in a systematic way.
+
+This project addresses that gap by constructing a semantic event map of Mark that is suitable for computational analysis. The event map will list all identified events, who performs them, who is affected by them, where and when they occur when such information is explicit, and how they are linked through basic discourse markers. The project will demonstrate how off the shelf semantic models can be applied to ancient religious literature and will assess their potential for supporting future work in digital humanities and theology.
+
+---
+
+## 2. Background and Significance
+
+The Gospel of Mark has been the subject of intensive narrative study, which has highlighted its fast pace, dense clustering of miracle stories, and characteristic motifs of secrecy, conflict, and misunderstanding. Traditional scholarship describes these features through close reading and manual segmentation into pericopes or episodes. Yet there is little quantitative evidence at the level of event structure that might support or challenge these descriptions.
+
+Semantic role labeling allows automatic identification of predicates and their arguments, typically in terms of roles such as agent, patient, experiencer, and beneficiary. Event extraction extends this by classifying predicates into event types and connecting them with participants, locations, and times. These tools are widely used in information extraction, summarization, and knowledge base construction, but have scarcely been applied to biblical texts.
+
+By applying these methods to Mark, this project will create one of the first event level semantic resources for the New Testament. The output will be relevant to computational linguists as a case study in domain transfer to ancient narrative, and to biblical scholars as a new empirical tool for examining narrative structure and character dynamics.
+
+---
+
+## 3. Research Aims and Questions
+
+The project has three primary aims:
+
+1. To design a formal event representation suitable for New Testament narrative, based on semantic role labeling and event extraction, and to implement this representation for the Gospel of Mark in an academic English translation.
+2. To analyze narrative structure in Mark using the resulting event map, with particular attention to patterns of agency, event type distribution, and episode segmentation.
+3. To assess the feasibility and limitations of using contemporary semantic models on ancient religious narrative, and to outline a roadmap for extension to other New Testament books.
+
+These aims give rise to the following research questions:
+
+- How can semantic role labeling and event extraction be integrated into a practical pipeline that produces an interpretable event map of Mark with minimal manual annotation?
+- What patterns of narrative action emerge when the events of Mark are classified by type and linked to canonical participants such as Jesus, the disciples, crowds, and opponents?
+- Can automated cues based on event sequences, participant shifts, and discourse markers approximate narrative episodes in a way that is comparable to traditional pericope divisions?
+- What kinds of model errors or domain mismatches appear when semantic models trained on modern English are applied to biblical narrative, and how do these affect interpretive use of the event map?
+
+---
+
+## 4. Theoretical Framework
+
+The project adopts a deliberately modest theoretical framework that centers on computational semantics and uses narratology and discourse analysis in a light and supportive manner.
+
+### Event Based Semantic Representation
+
+A sentence contains one or more predicates, each of which may represent an event. Semantic role labeling provides a predicate together with its arguments, which are interpreted as participants in an event. This aligns with standard practice in computational linguistics.
+
+### Narratological Perspective
+
+Mark is treated as a sequence of events in which characters act and are acted upon. Agents, patients, and other roles correspond to narrative functions. Temporal ordering of events approximates plot progression. Episodes are understood as clusters of events that form coherent units.
+
+### Automated Discourse Cues
+
+Coordinating and subordinating conjunctions, temporal adverbs, and shifts of location or dominant participant are treated as signals of narrative transitions. These are detected automatically and used to propose episode boundaries and enrich the event graph.
+
+---
+
+## 5. Methodology
+
+The methodology consists of coordinated modules forming a complete pipeline from raw text to analyzed event map.
+
+### 5.1 Corpus Selection and Preprocessing
+
+The corpus will consist of the Gospel of Mark in a standard academic English translation. Preprocessing will include:
+
+- sentence segmentation  
+- tokenization  
+- verse alignment
+
+Outputs: structured sentences with identifiers and verse metadata.
+
+### 5.2 Semantic Role Labeling
+
+A transformer based SRL model (PropBank style) will be used to identify:
+
+- predicates  
+- argument spans  
+- role labels  
+
+Labels will then be normalized to a simplified set: agent, patient, experiencer, beneficiary, location, time, purpose, cause.
+
+A small sample will be checked manually to assess quality.
+
+### 5.3 Event Extraction and Typing
+
+Only predicates representing narrative events will be selected. For each, an event candidate is created.
+
+Event typing procedure:
+
+1. Collect predicate lemmas  
+2. Embed and cluster  
+3. Assign cluster labels such as:  
+
+   - teaching  
+   - healing  
+   - conflict  
+   - travel  
+   - speech  
+   - miracle  
+
+### 5.4 Entity Identification and Normalization
+
+A canonical list of major entities (Jesus, disciples, Pharisees, crowds, etc.) will be compiled.
+
+Argument spans will be mapped to canonical entities using:
+
+- rule based name matching  
+- lexicons  
+- pronoun resolution via proximity heuristics  
+
+### 5.5 Event Map Construction
+
+Each event record will include:
+
+- event ID  
+- predicate lemma  
+- event type  
+- sentence ID  
+- verse reference  
+- participants and roles  
+- narrative order index  
+
+Discourse markers like **and**, **but**, **when**, **then**, **because** will be extracted and used to infer event transitions.
+
+The event map may be represented as a table or graph.
+
+### 5.6 Narrative Analysis
+
+Analyses include:
+
+#### Character Centered Patterns  
+Frequencies of agents and patients across event types, focusing on major entities.
+
+#### Event Type Distributions  
+By chapter and narrative segment, identifying where miracles, teachings, or conflicts cluster.
+
+#### Episode Segmentation  
+Heuristics combining:
+
+- event type shifts  
+- location changes  
+- discourse markers  
+
+Results will be compared to traditional pericope boundaries.
+
+### 5.7 Evaluation and Validation
+
+**Computational evaluation:**  
+Manual annotation on a gold subset for precision and recall.
+
+**Interpretive evaluation:**  
+Comparison of results to narrative critical scholarship on Mark.
+
+---
+
+## 6. Work Plan and Feasibility
+
+The project proceeds in three stages:
+
+### 1. Conceptual Design
+Define schema, roles, event types, and entities. Low computational load.
+
+### 2. Pilot Implementation on Mark
+Run the full pipeline, construct event map, and generate initial analyses.
+
+### 3. Extension and Refinement
+Improve selection criteria, event typing, and entity rules. Sketch extension to other texts.
+
+Technical requirements: Python, NLP libraries, off the shelf semantic models.
+
+---
+
+## 7. Expected Contributions
+
+- A structured semantic event map of Mark with typed events and canonical participants  
+- A documented NLP pipeline for applying SRL and event extraction to ancient narrative  
+- Quantitative narrative structure descriptions  
+- A methodological template for extending computational analysis to other biblical texts  
+
+---
+
+## 8. Limitations and Future Work
+
+Limitations include:
+
+- reliance on English translation rather than Greek  
+- model domain mismatch  
+- approximate coreference and entity normalization  
+- coarse event classification  
+
+Future improvements may involve:
+
+- models adapted to biblical English  
+- integration with Greek linguistic data  
+- advanced coreference models  
+- expansion to Luke, Acts, and Johannine narrative  
+
+---
+
+## 9. Conclusion
+
+This proposal outlines a computational project that constructs a semantic event map of the Gospel of Mark through semantic role labeling and event extraction. By integrating modern semantic models with a foundational narrative text, the study opens a path for collaboration between computational linguistics and biblical studies. The resulting event map will make the network of actions and participants explicit and support deeper theological and literary interpretation in future work.

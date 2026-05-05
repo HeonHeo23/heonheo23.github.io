@@ -1,0 +1,115 @@
+# Idea Influence Graph
+
+## A comprehensive idea representation and its Influence
+
+---
+
+## Table of Contents
+
+- 1. [Introduction](#Introduction)
+
+## 1. Introduction
+
+### 1.1 Purpose
+
+### 1.2 User Stories
+
+1. **Create an idea**: As a user, I want to add a new idea with a name and description so that I can begin representing it in the system.
+2. **View an idea**: As a user, I want to view details of an idea so that I can learn what it is and its context.
+3. **Add an influence**: As a user, I want to connect one idea as influencing another so that I can model conceptual lineage.
+4. **View direct influences**: As a user, I want to see which ideas directly influenced an idea so that I can understand its immediate intellectual ancestry.
+5. **View direct descendants**: As a user, I want to see which ideas were influenced by an idea so that I can understand what came out of it.
+6. **Explore the lineage (ancestors)**: As a user, I want to explore an idea’s ancestors recursively so that I can identify its deeper origins.
+7. **Explore the influence tree (descendants)**: As a user, I want to see all ideas that stem from a root idea so that I can understand its historical or conceptual impact.
+8. **Visualize relationships**: As a user, I want a visual graph of ideas and influences so that I can see relationships more intuitively.
+9. **Search for ideas**: As a user, I want to search ideas by name or keyword so that I can find ideas quickly.
+10. **Influence weights**: As a user, I want to assign influence strength so that I can express which influences were stronger or weaker.
+11. **Categorize influence types**: As a user, I want to label influences (historical, conceptual, cultural, reactionary) so that I can distinguish types of influence.
+12. **Time-based filters**: As a user, I want to filter influences by time periods so that I can focus on specific historical eras.
+13. **Compare two ideas**: As a user, I want to compare two ideas so that I can see similarities, shared ancestors, or shared descendants.
+14. **See shared influences**: As a user, I want to see which ideas influenced both X and Y so that I can understand conceptual convergence.
+15. **Find major influencers**: As a user, I want to find ideas with the most descendants so that I can identify historically important ideas.
+16. **Find most influenced ideas**: As a user, I want to find ideas that have many parents so that I can identify synthesis or hybrid ideas.
+17. **Identify influence chains**: As a user, I want to trace the path from idea A to idea B so that I can see how concepts propagated.
+18. **Detect clusters**: As a user, I want to see groups of highly interconnected ideas so that I can understand thematic or cultural clusters.
+19. **Edit an idea**: As an editor, I want to modify an idea’s name, description, or metadata so that I can correct mistakes or expand detail.
+20. **Edit an influence**: As an editor, I want to change influence types or strengths so that I can refine conceptual accuracy.
+21. **Remove an idea**: As an editor, I want to remove an idea so that I can fix errors or remove duplicates.
+22. **Validate relationships**: As an editor, I want the system to prevent invalid edges so that influences remain meaningful and non-contradictory.
+23. **Suggest influences**: As an editor, I want the system to suggest likely influences so that manual work is reduced.
+24. **Export the data**: As a researcher, I want to export ideas and influences so that I can analyze them externally.
+25. **Autofill info**: As a researcher, I want the system to fetch basic info from external sources so that creating ideas is faster.
+26. **Support version history**: As a researcher, I want to see past versions of ideas and influences so that I can track changes over time.
+
+## 2. Core objects and algorithms / data model
+
+### 2.1 Domain model
+
+The data is stored as a directed graph
+
+#### 2.1.1 Node: Idea
+
+- id
+- name
+- description
+- originDate
+- createdAt
+- updatedAt
+
+#### 2.1.2 Edge: Influence
+
+- id
+- fromId
+- toId
+- type
+- strengths
+- notes
+- dateRange
+- createdAt
+- updatedAt
+
+### 2.2 Operations
+
+#### 2.2.1 Core Operations
+
+- CRUD Idea
+- CRUD Influence
+
+#### 2.2.2 Graph Operations
+
+- GetAncestors
+- GetDescendants
+- GetSubgraph
+- FindShortestPath(A, B)
+- Cycle detection
+- Graph clustering
+
+## 3. Log
+
+### 3.1 Preliminary
+
+#### 11.24
+- Initialized the design.
+- https://github.com/ooanishoo/family-tree - reference
+- The above example implements the tree-based diagram visualization; rather, this project
+
+#### 11.25
+- Implemented basic structure.
+
+#### 11.26
+- Implemented model.
+
+#### 11.27
+- File read/write
+
+#### 11.28
+- Create Idea component
+
+#### 11.29
+- Client vs Server Component: Create and delete
+
+#### 11.30
+- Needs a separate 
+
+#### 12.10
+- Server / client reconsidered: IdeaList

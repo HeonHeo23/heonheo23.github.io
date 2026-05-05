@@ -1,0 +1,166 @@
+// content/pilotPack.ts
+import { PilotPack } from "../game/simTypes";
+
+export const pilotPack: PilotPack = {
+  version: "pilot_v1",
+  title: "Pilot Scenario",
+  turnTarget: 30,
+  authorityStart: 10,
+  authorityCap: 20,
+  authorityBaseIncome: 6,
+  authorityWeights: {
+    legitimacyIndicatorId: "publicLegitimacy",
+    unityIndicatorId: "unityCohesion",
+    schismIndicatorId: "schismPressure",
+    integrityIndicatorId: "institutionalIntegrity",
+    wLegitimacy: 4,
+    wUnity: 3,
+    wSchism: 5,
+    wIntegrity: 2,
+  },
+  indicators: [
+    {
+      id: "doctrinalClarity",
+      name: "Doctrinal Clarity",
+      description: "How coherent teaching and confession are.",
+      startValue: 0.5,
+    },
+    {
+      id: "spiritualVitality",
+      name: "Spiritual Vitality",
+      description: "Energy of worship and devotion.",
+      startValue: 0.5,
+    },
+    {
+      id: "institutionalIntegrity",
+      name: "Institutional Integrity",
+      description: "Trust and lack of corruption.",
+      startValue: 0.6,
+    },
+    {
+      id: "unityCohesion",
+      name: "Unity Cohesion",
+      description: "Internal cohesion across factions.",
+      startValue: 0.55,
+    },
+    {
+      id: "schismPressure",
+      name: "Schism Pressure",
+      description: "Risk of fragmentation.",
+      startValue: 0.35,
+    },
+    {
+      id: "publicLegitimacy",
+      name: "Public Legitimacy",
+      description: "Standing with wider society.",
+      startValue: 0.5,
+    },
+    {
+      id: "clergyQuality",
+      name: "Clergy Quality",
+      description: "Training and competence.",
+      startValue: 0.45,
+    },
+  ],
+  stances: [
+    {
+      id: "confessionalStrictness",
+      name: "Confessional Strictness",
+      description: "How strict subscription and boundaries are.",
+      category: "Doctrine",
+      baseCost: 1,
+      costPerPoint: 6,
+      maxDeltaPerTurn: 0.2,
+      effects: [
+        { targetIndicatorId: "doctrinalClarity", strength: 0.10, inertiaTurns: 3 },
+        { targetIndicatorId: "unityCohesion", strength: -0.08, inertiaTurns: 3 },
+        { targetIndicatorId: "schismPressure", strength: 0.10, inertiaTurns: 2 },
+      ],
+    },
+    {
+      id: "disciplineEnforcement",
+      name: "Discipline Enforcement",
+      description: "How strongly discipline is applied.",
+      category: "Governance",
+      baseCost: 1,
+      costPerPoint: 5,
+      maxDeltaPerTurn: 0.25,
+      effects: [
+        { targetIndicatorId: "institutionalIntegrity", strength: 0.08, inertiaTurns: 2 },
+        { targetIndicatorId: "unityCohesion", strength: -0.05, inertiaTurns: 2 },
+      ],
+    },
+    {
+      id: "seminaryInvestment",
+      name: "Seminary Investment",
+      description: "Investment in training and education.",
+      category: "Institution",
+      baseCost: 1,
+      costPerPoint: 7,
+      maxDeltaPerTurn: 0.2,
+      effects: [
+        { targetIndicatorId: "clergyQuality", strength: 0.12, inertiaTurns: 4 },
+        { targetIndicatorId: "publicLegitimacy", strength: 0.04, inertiaTurns: 3 },
+      ],
+    },
+    {
+      id: "ecumenismOpenness",
+      name: "Ecumenism Openness",
+      description: "Willingness to cooperate across lines.",
+      category: "Society",
+      baseCost: 1,
+      costPerPoint: 5,
+      maxDeltaPerTurn: 0.25,
+      effects: [
+        { targetIndicatorId: "publicLegitimacy", strength: 0.08, inertiaTurns: 2 },
+        { targetIndicatorId: "doctrinalClarity", strength: -0.06, inertiaTurns: 2 },
+        { targetIndicatorId: "unityCohesion", strength: 0.05, inertiaTurns: 2 },
+      ],
+    },
+  ],
+  factions: [
+    {
+      id: "confessionalists",
+      name: "Confessionalists",
+      description: "Prefer clarity and strict boundaries.",
+      weight: 1.0,
+      responsiveness: 0.35,
+      preferences: [
+        { sourceType: "indicator", sourceId: "doctrinalClarity", ideal: 0.85, sensitivity: 1.0 },
+        { sourceType: "stance", sourceId: "confessionalStrictness", ideal: 0.8, sensitivity: 0.8 },
+        { sourceType: "stance", sourceId: "ecumenismOpenness", ideal: 0.2, sensitivity: 0.6 },
+      ],
+    },
+    {
+      id: "revivalists",
+      name: "Revivalists",
+      description: "Prefer vitality over control.",
+      weight: 0.9,
+      responsiveness: 0.4,
+      preferences: [
+        { sourceType: "indicator", sourceId: "spiritualVitality", ideal: 0.85, sensitivity: 1.0 },
+        { sourceType: "stance", sourceId: "disciplineEnforcement", ideal: 0.25, sensitivity: 0.6 },
+      ],
+    },
+    {
+      id: "institutionalists",
+      name: "Institutionalists",
+      description: "Prefer integrity, legitimacy, and stability.",
+      weight: 1.1,
+      responsiveness: 0.3,
+      preferences: [
+        { sourceType: "indicator", sourceId: "institutionalIntegrity", ideal: 0.8, sensitivity: 1.0 },
+        { sourceType: "indicator", sourceId: "publicLegitimacy", ideal: 0.75, sensitivity: 0.8 },
+        { sourceType: "indicator", sourceId: "unityCohesion", ideal: 0.75, sensitivity: 0.8 },
+      ],
+    },
+  ],
+  initial: {
+    stanceValues: {
+      confessionalStrictness: 0.5,
+      disciplineEnforcement: 0.45,
+      seminaryInvestment: 0.4,
+      ecumenismOpenness: 0.35,
+    },
+  },
+};
