@@ -1,0 +1,193 @@
+# Semantic Event Modeling for Historical Narrative  
+## A Domain Adapted Pipeline for the Gospel of Mark
+
+---
+
+## 1. Introduction and Motivation
+
+Historical narrative texts such as the Gospel of Mark present a rich but methodologically challenging testbed for semantic natural language processing. Recent work in NLP for historical corpora has focused mainly on spelling normalization, part of speech tagging, and lexical semantic change. There has been comparatively little work on full semantic event modeling of historical narrative: systematically extracting events, participants, and basic discourse relations in a way that yields a structured representation of the story.
+
+Most semantic role labeling and event extraction models are trained on contemporary genres such as newswire and web text. When applied to historical or quasi-archaic English (including academic Bible translations), their performance and error profiles are largely unknown. Existing historical NLP surveys repeatedly note the need for domain-adapted models and for frameworks that respect language variation and change, but they mostly address token-level tasks or lexical semantics rather than narrative event structure.
+
+This project responds to that gap by designing, implementing, and evaluating a domain-adapted semantic event pipeline for one historical narrative text, the Gospel of Mark in a widely used academic English translation. The central aim is to show how modern semantic models can be adapted and composed to produce a usable event map for historical narrative, with technical evaluation anchored in a small manually annotated subset. Diachronic semantic issues and integration with humanities workflows are treated conceptually as future directions rather than core components.
+
+---
+
+## 2. Aims and Research Questions
+
+The project pursues three closely related aims:
+
+1. Construct a semantic event representation for the Gospel of Mark that captures predicate argument structure, event types, and basic event sequencing in a form suitable for narrative analysis.
+
+2. Evaluate the performance of existing semantic role labeling and event extraction models on this historical narrative domain and investigate lightweight domain adaptation strategies.
+
+3. Articulate a generalizable framework for semantic event modeling of historical narrative that can guide future work on other texts and languages.
+
+These aims motivate the following research questions:
+
+- **RQ1.** How well do contemporary SRL and event extraction models perform on an academic English translation of Mark, and what are their systematic errors in this domain  
+- **RQ2.** Which adaptation strategies, given limited annotated data, yield the most significant improvements in semantic role and event detection on this historical narrative corpus  
+- **RQ3.** How should events, event types, and participants be represented so that the resulting event map is both technically coherent and meaningful for narrative-oriented analysis  
+
+Diachronic semantics enters conceptually: how might knowledge of historical word meaning variation inform event type design and interpretation, especially when working in translation.
+
+---
+
+## 3. Background and Identified Gap
+
+Work in NLP for historical texts has established several themes:
+
+- Historical corpora exhibit orthographic variation, domain shift, and limited annotation, which degrade the performance of models trained on modern text.
+- There has been a surge of research on lexical semantic change using co-occurrence statistics and embeddings to trace meaning shifts.
+- Digital humanities projects use topic models and basic information extraction to explore large archives.
+
+However, the literature shows relatively little attention to *full semantic event pipelines* for historical narrative. Event extraction research is dominated by news and biomedical domains with well defined schemas and ample annotated data. Historical narrative differs in genre, style, and available resources, involving complex reported speech, multi-clause episodes, and culturally specific action types.
+
+Thus, the missing elements are:
+
+- systematic evaluation of semantic models on historical narrative  
+- explicit domain adaptation strategies under limited supervision  
+- a clear event representation tailored to narrative texts  
+
+This project positions semantic event modeling of Mark as a focused pilot that concretely addresses this gap.
+
+---
+
+## 4. Proposed Contribution
+
+The project provides a **mixed contribution** (method + resource + framework):
+
+### 4.1 Method
+A domain-adapted semantic event pipeline for historical narrative in English, including:
+- semantic role labeling  
+- event filtering and typing  
+- lightweight discourse-aware event sequencing  
+
+### 4.2 Resource
+A structured Event Map of the Gospel of Mark containing:
+- automatically extracted events for the full book  
+- a small manually annotated gold subset  
+- documented annotation guidelines for predicates, roles, and events  
+
+### 4.3 Framework
+A conceptual and practical framework for event modeling in historical narrative:
+- event representation design  
+- adaptation strategies for low-resource historical domains  
+- recommendations for extension to other texts and languages  
+
+---
+
+## 5. Methodology
+
+### 5.1 Corpus and Preprocessing
+- Use a standard academic English translation of Mark.  
+- Segment into chapters, verses, and sentences.  
+- Tokenize with preservation of punctuation and quotation.  
+- Associate each sentence with verse metadata.  
+
+Output: a clean sentence-level corpus with identifiers and tokens.
+
+### 5.2 Baseline SRL and Event Candidates
+- Apply an existing transformer-based SRL model to each sentence.  
+- Map model-specific labels to a simplified narrative-oriented role set.  
+- Extract **event candidates** by selecting narrative-relevant verbal predicates.  
+
+This stage provides baseline SRL performance and initial event candidates.
+
+### 5.3 Domain Adaptation Strategy
+A small annotated subset (several hundred predicates) will be created.
+
+Adaptation techniques may include:
+- fine-tuning SRL on this subset  
+- adding lexical / contextual features specific to biblical English  
+- limited normalization of archaic expressions prior to SRL  
+
+Goal: improvement in SRL and event detection F1 under minimal annotation.
+
+### 5.4 Event Typing and Representation
+- Develop a compact event ontology tailored to Mark.  
+- Cluster predicate lemmas using distributional embeddings.  
+- Map clusters to event types with manual inspection.  
+- Optionally train a classifier for event type assignment.
+
+Structured event record includes:
+- event ID  
+- predicate lemma  
+- event type  
+- arguments and roles  
+- canonical participant (when identifiable)  
+- sentence and verse reference  
+- narrative sequence index  
+
+### 5.5 Entity Resolution and Participants
+Implement simple normalization:
+- canonical list of key figures and groups  
+- rule-based mapping of surface mentions  
+- local pronoun heuristics  
+
+Goal: sufficient normalization for basic participant-centered queries.
+
+### 5.6 Event Sequencing and Basic Discourse Cues
+- Order events by verse position.  
+- Extract discourse markers (and, then, when, etc.).  
+- Attach location changes and simple temporal cues.
+
+This provides minimal relational structure (proto-episodes, clusters).
+
+### 5.7 Technical Evaluation
+Evaluation is **purely technical**, using the annotated subset.
+
+Metrics:
+- precision/recall/F1 for SRL role assignment  
+- precision/recall/F1 for event detection  
+- classification accuracy / macro F1 for event typing  
+
+Error analysis will focus on failures with reported speech, coordination, and biblical idiom.
+
+---
+
+## 6. Significance and Future Directions
+
+The project directly addresses a recognized gap: lack of semantic event pipelines for full historical narrative texts. It moves beyond token-level tasks by providing structured event representations aligned with narrative inquiry.
+
+Outputs:
+- an event map of Mark  
+- annotation guidelines  
+- a small gold evaluation subset  
+
+Conceptual extensions:
+- how diachronic semantics could later enrich event types  
+- how this pipeline could be instantiated on Greek or on parallel corpora  
+- how the representation could support questions in theology and historical criticism  
+
+These remain future directions, keeping the present project computationally focused.
+
+---
+
+## 7. Work Plan
+
+**Phase 1. Design and Corpus Preparation**  
+- select translation  
+- prepare sentence-level corpus  
+- define event representation  
+
+**Phase 2. Baseline Modeling and Annotation**  
+- run baseline SRL  
+- annotate small subset  
+
+**Phase 3. Domain Adaptation and Event Typing**  
+- fine-tune or adapt SRL  
+- design event type schema  
+- implement event typing  
+
+**Phase 4. Evaluation and Error Analysis**  
+- compute evaluation metrics  
+- conduct qualitative error analysis  
+
+**Phase 5. Event Map Construction and Write-up**  
+- build full event map  
+- finalize documentation  
+- prepare research article  
+
+---
+

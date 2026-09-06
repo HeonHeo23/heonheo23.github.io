@@ -1,0 +1,5 @@
+{
+    "editor.tabSize": 2,        // Change to 2, 4, 8, etc.
+    "editor.insertSpaces": true, // true = spaces, false = tabs
+    "editor.detectIndentation": false // Ensures your setting is enforced
+  }

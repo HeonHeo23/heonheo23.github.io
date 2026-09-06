@@ -1,0 +1,68 @@
+{
+  "ideas": [
+    {
+      "id": "d792e028-7df0-4719-8b7b-9a2feb6e184f",
+      "name": "Test",
+      "description": "What if I write a long description in this field?",
+      "originDate": 1662,
+      "createdAt": "2025-12-03T14:31:50.295Z",
+      "updatedAt": "2025-12-03T14:31:50.295Z"
+    },
+    {
+      "id": "8b1ed960-9982-4d3a-9c0b-8158bf7ff384",
+      "name": "OP More",
+      "description": "This is a structured way of developing a new program. What are contained in the code determine everything that pertains to life. This is a structured way of developing a new program. What are contained in the code determine everything that pertains to life.",
+      "originDate": 968,
+      "createdAt": "2025-12-06T12:08:31.354Z",
+      "updatedAt": "2025-12-06T12:08:31.354Z"
+    },
+    {
+      "id": "79845814-6752-4df7-bd3d-d201ad449a76",
+      "name": "How about this",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      "originDate": 1321,
+      "createdAt": "2025-12-13T04:11:07.749Z",
+      "updatedAt": "2025-12-13T04:11:07.749Z"
+    },
+    {
+      "id": "621750ed-1469-4c28-a88d-b42fbc5f1130",
+      "name": "OPeasc",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      "originDate": 1411,
+      "createdAt": "2025-12-13T04:12:51.580Z",
+      "updatedAt": "2025-12-13T04:12:51.580Z"
+    },
+    {
+      "id": "8d898617-2df6-4c0b-8f69-ef0d65a203d4",
+      "name": "Metod",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      "originDate": 1831,
+      "createdAt": "2025-12-13T04:13:58.820Z",
+      "updatedAt": "2025-12-13T04:13:58.820Z"
+    },
+    {
+      "id": "b0ebc604-c099-40da-8f2c-f99cae49e719",
+      "name": "Won",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      "originDate": 1558,
+      "createdAt": "2025-12-13T04:14:15.800Z",
+      "updatedAt": "2025-12-13T04:14:15.800Z"
+    }
+  ],
+  "influences": [
+    {
+      "id": "f57545f2-79b5-4eda-a31a-142363a5cccc",
+      "strength": 0.3,
+      "fromId": "8b1ed960-9982-4d3a-9c0b-8158bf7ff384",
+      "toId": "621750ed-1469-4c28-a88d-b42fbc5f1130",
+      "type": ""
+    },
+    {
+      "id": "e886b866-876b-4d12-ac72-95123ae6772a",
+      "strength": 0.3,
+      "fromId": "8b1ed960-9982-4d3a-9c0b-8158bf7ff384",
+      "toId": "b0ebc604-c099-40da-8f2c-f99cae49e719",
+      "type": ""
+    }
+  ]
+}
