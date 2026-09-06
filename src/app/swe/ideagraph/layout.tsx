@@ -1,10 +1,4 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Heon Heo",
-  description: "Personal Website",
-};
+import Link from "../../components/Link";
 
 export default function RootLayout({
   children,

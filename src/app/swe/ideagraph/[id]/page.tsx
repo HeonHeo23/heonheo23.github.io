@@ -1,17 +1,12 @@
-import Link from "next/link";
+import { useParams } from "react-router-dom";
+import Link from "../../../components/Link";
 import { ideaGraph } from "../lib/models/graph";
 
-interface PageProps {
-  params: { id: string };
-}
-
-// Server Component must be async to handle dynamic params
-
-const Page = async ({ params }: PageProps) => {
-  const { id } = await params;
-  const idea = await ideaGraph.getIdea(id);
-  const children = await ideaGraph.getChildren(id);
-  const parents = await ideaGraph.getParents(id);
+const Page = () => {
+  const { id = "" } = useParams();
+  const idea = ideaGraph.getIdea(id);
+  const children = ideaGraph.getChildren(id);
+  const parents = ideaGraph.getParents(id);
 
   if (!idea) {
     return (
@@ -31,7 +26,7 @@ const Page = async ({ params }: PageProps) => {
           <h2 className="text-4xl font-extrabold">{idea.name}</h2>
           <div className="flex gap-2">
             <Link
-              href={`influence/add`}
+              href="/swe/ideagraph/influence/add"
               className="btn btn-secondary"
             >
               Influence
@@ -53,7 +48,7 @@ const Page = async ({ params }: PageProps) => {
           <ul className="list">
             {parents.map((i, idx) => (
               <li key={idx} className="list-row link-hover">
-                <Link href={`${i.idea.id}`}>{i.idea.name} ({i.strength})</Link>
+                <Link href={`/swe/ideagraph/${i.idea.id}`}>{i.idea.name} ({i.strength})</Link>
               </li>
             ))}
           </ul>
@@ -63,7 +58,7 @@ const Page = async ({ params }: PageProps) => {
           <ul className="list">
             {children.map((i, idx) => (
               <li key={idx} className="list-row link-hover">
-                <Link href={`${i.idea.id}`}>{i.idea.name} ({i.strength})</Link>
+                <Link href={`/swe/ideagraph/${i.idea.id}`}>{i.idea.name} ({i.strength})</Link>
               </li>
             ))}
           </ul>

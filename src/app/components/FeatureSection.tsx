@@ -1,171 +1,252 @@
-import cn from "classnames";
-import React from "react";
+import Link from "./Link";
 
-type Props = {};
-
-const FeatureSection = (props: Props) => {
-  return (
-    // <section className="bg-white dark:bg-gray-900">
-    //   <div className={cn("py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6")}>
-    //     <div className="max-w-screen-md mb-8 lg:mb-16">
-    //       <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-    //         Designed for business teams like yours
-    //       </h2>
-    //       <p className="text-gray-500 sm:text-xl dark:text-gray-400">
-    //         Here at Flowbite we focus on markets where technology, innovation,
-    //         and capital can unlock long-term value and drive economic growth.
-    //       </p>
-    //     </div>
-    //     <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-    //       <div>
-    //         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-    //           <svg
-    //             className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-    //             fill="currentColor"
-    //             viewBox="0 0 20 20"
-    //             xmlns="http://www.w3.org/2000/svg"
-    //           >
-    //             <path
-    //               fillRule="evenodd"
-    //               d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
-    //               clipRule="evenodd"
-    //             ></path>
-    //           </svg>
-    //         </div>
-    //         <h3 className="mb-2 text-xl font-bold dark:text-white">
-    //           Computer Engineering, University of Florida (Class of 2028)
-    //         </h3>
-    //         <p className="text-gray-500 dark:text-gray-400">
-    //           Plan it, create it, launch it. Collaborate seamlessly with all the
-    //           organization and hit your marketing goals every month with our
-    //           marketing plan.
-    //         </p>
-    //       </div>
-    //       <div>
-    //         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-    //           <svg
-    //             className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-    //             fill="currentColor"
-    //             viewBox="0 0 20 20"
-    //             xmlns="http://www.w3.org/2000/svg"
-    //           >
-    //             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
-    //           </svg>
-    //         </div>
-    //         <h3 className="mb-2 text-xl font-bold dark:text-white">
-    //           Software Engineering Intern, Tern
-    //         </h3>
-    //         <p className="text-gray-500 dark:text-gray-400">
-    //           Protect your organization, devices and stay compliant with our
-    //           structured workflows and custom permissions made for you.
-    //         </p>
-    //       </div>
-    //       <div>
-    //         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-    //           <svg
-    //             className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-    //             fill="currentColor"
-    //             viewBox="0 0 20 20"
-    //             xmlns="http://www.w3.org/2000/svg"
-    //           >
-    //             <path
-    //               fill-rule="evenodd"
-    //               d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-    //               clip-rule="evenodd"
-    //             ></path>
-    //             <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
-    //           </svg>
-    //         </div>
-    //         <h3 className="mb-2 text-xl font-bold dark:text-white">
-    //           IPPD Program w/ Arthrex
-    //         </h3>
-    //         <p className="text-gray-500 dark:text-gray-400">
-    //           Auto-assign tasks, send Slack messages, and much more. Now power
-    //           up with hundreds of new templates to help you get started.
-    //         </p>
-    //       </div>
-    //       <div>
-    //         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-    //           <svg
-    //             className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-    //             fill="currentColor"
-    //             viewBox="0 0 20 20"
-    //             xmlns="http://www.w3.org/2000/svg"
-    //           >
-    //             <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
-    //             <path
-    //               fill-rule="evenodd"
-    //               d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-    //               clip-rule="evenodd"
-    //             ></path>
-    //           </svg>
-    //         </div>
-    //         <h3 className="mb-2 text-xl font-bold dark:text-white">
-    //           Florida Department of Transportation
-    //         </h3>
-    //         <p className="text-gray-500 dark:text-gray-400">
-    //           Audit-proof software built for critical financial operations like
-    //           month-end close and quarterly budgeting.
-    //         </p>
-    //       </div>
-    //       <div>
-    //         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-    //           <svg
-    //             className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-    //             fill="currentColor"
-    //             viewBox="0 0 20 20"
-    //             xmlns="http://www.w3.org/2000/svg"
-    //           >
-    //             <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
-    //           </svg>
-    //         </div>
-    //         <h3 className="mb-2 text-xl font-bold dark:text-white">
-    //           Intelligent Ontology Lab
-    //         </h3>
-    //         <p className="text-gray-500 dark:text-gray-400">
-    //           Craft beautiful, delightful experiences for both marketing and
-    //           product with real cross-company collaboration.
-    //         </p>
-    //       </div>
-    //       <div>
-    //         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-    //           <svg
-    //             className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-    //             fill="currentColor"
-    //             viewBox="0 0 20 20"
-    //             xmlns="http://www.w3.org/2000/svg"
-    //           >
-    //             <path
-    //               fill-rule="evenodd"
-    //               d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-    //               clip-rule="evenodd"
-    //             ></path>
-    //           </svg>
-    //         </div>
-    //         <h3 className="mb-2 text-xl font-bold dark:text-white">
-    //           Florida Museum of Natural History
-    //         </h3>
-    //         <p className="text-gray-500 dark:text-gray-400">
-    //           Keep your company’s lights on with customizable, iterative, and
-    //           structured workflows built for all efficient teams and individual.
-    //         </p>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </section>
-    <section className="w-full">
-      {/* <ul className="list">
-        <li className="list-row">IPPD Program w/ Arthrex</li>
-        <li className="list-row">Florida Department of Transportation</li>
-        <li className="list-row">Intelligent Ontology Lab</li>
-        <li className="list-row">Florida Museum of Natural History</li>
-      </ul> */}
-      <ul className="w-full flex flex-row justify-evenly">
-        <li className="w-full py-7 flex bg-yellow-50 shadow-md">Computer Engineering, University of Florida (Class of 2028)</li>
-        <li className="w-full py-7 flex bg-yellow-50 shadow-md">Software Engineering Intern, Tern</li>
-      </ul>
-    </section>
-  );
+type Highlight = {
+  category: string;
+  title: string;
+  company: string;
+  href?: string;
+  meta: string;
+  year: string;
+  short: string;
+  details?: string[];
+  skills?: string[];
+  color: string;
 };
 
-export default FeatureSection;
+const highlights: Highlight[] = [
+  {
+    category: "Research",
+    title: "Journal Article",
+    company: "Deep learning-assisted cytological image analysis for canine lymphoma",
+    href: "/research/deep-learning-assisted-cytological-image-analysis-for-canine-lymphoma",
+    meta: "Veterinary Oncology · Springer Nature · DOI 10.1186/s44356-026-00056-5",
+    year: "2026",
+    short:
+      "Computer vision for canine lymphoma classification.",
+    color: "bg-accent text-accent-content",
+  },
+  {
+    category: "Experience",
+    title: "System Engineer",
+    company: "Republic of Korea Air Force",
+    meta: "Communication System Engineering",
+    year: "2025 — PRESENT",
+    short:
+      "Communication systems engineering and mission support.",
+    details: [
+      "Support communication-system engineering work where dependable infrastructure and clear technical judgment are essential to mission operations.",
+      "Use systems thinking to analyze operational needs, coordinate technical decisions, and help maintain reliable communication capabilities.",
+    ],
+    skills: ["Systems engineering", "Communication systems", "Technical analysis"],
+    color: "bg-secondary text-secondary-content",
+  },
+  {
+    category: "Research",
+    title: "Conference Proceeding",
+    company: "Structured inverse design: a tile-based approach for practical photonic integration",
+    href: "/research/structured-inverse-design-a-tile-based-approach-for-practical-photonic-integration",
+    meta: "Optical Design Automation · SPIE · DOI 10.1117/12.3066478",
+    year: "2025",
+    short:
+      "Automated photonic design with optimization and FDTD simulation.",
+    color: "bg-accent text-accent-content",
+  },
+  {
+    category: "Experience",
+    title: "Software Engineering Intern",
+    company: "Tern Computer Inc.",
+    meta: "Advanced semiconductor design program",
+    year: "2025",
+    short:
+      "Semiconductor design platform built with Next.js and Firebase.",
+    details: [
+      "Developed a production-oriented web application for an advanced semiconductor design program, connecting an interactive interface to application logic and cloud data.",
+      "Worked across the stack with Next.js, React, Node.js, and Firebase to turn design workflows into usable software.",
+    ],
+    skills: ["Next.js", "React", "Node.js", "Firebase"],
+    color: "bg-secondary text-secondary-content",
+  },
+  {
+    category: "Experience",
+    title: "Software Engineer · IPPD",
+    company: "Arthrex",
+    meta: "Integrated Product & Process Design Project at UF",
+    year: "2024 — 2025",
+    short:
+      "Embedded coolant-control prototype with Python and WebSocket.",
+    details: [
+      "Built a $2,000 proof-of-concept coolant delivery system that combined real-time control, hardware integration, and a Python, Flask, and WebSocket software stack.",
+      "Designed embedded software, circuitry, signal processing, data logging, and an interactive GUI around an object-oriented system architecture.",
+      "Improved dynamic responsiveness through adaptive control and parameter tuning, then created a verification dashboard for unit, feature, and integration testing.",
+      "Worked with mechanical and biomedical engineers to define requirements, assess risks, support regulatory alignment, and maintain design traceability.",
+    ],
+    skills: ["Python", "Flask", "WebSocket", "Embedded systems"],
+    color: "bg-secondary text-secondary-content",
+  },
+  {
+    category: "Experience",
+    title: "Monitoring Engineer",
+    company: "Florida Department of Transportation",
+    meta: "Accelerated Pavement Testing",
+    year: "2024",
+    short:
+      "Pavement testing, simulator monitoring, and laser scanning.",
+    details: [
+      "Operated and monitored the Heavy Vehicle Simulator at FDOT’s Accelerated Pavement Testing facility to protect test reliability and data quality.",
+      "Used laser scanning to collect precise measurements for evaluating pavement performance.",
+      "Diagnosed operational issues by managing machine functions and troubleshooting the simulator during testing.",
+    ],
+    skills: ["Data collection", "Test monitoring", "Laser scanning"],
+    color: "bg-secondary text-secondary-content",
+  },
+  {
+    category: "Education",
+    title: "B.S. in Computer Engineering",
+    company: "University of Florida",
+    meta: "Minor in Linguistics · 3.81 GPA",
+    year: "AUG 2022 — MAY 2028",
+    short:
+      "",
+    details: [
+      "Build a foundation in computer engineering through coursework spanning software, hardware, and systems design.",
+      "Combine engineering study with a linguistics minor to explore the relationship between computation, systems, and language.",
+    ],
+    // skills: ["Computer engineering", "Systems", "Software", "Linguistics"],
+    color: "bg-primary text-primary-content",
+  },
+];
+
+function HighlightGrid({ items }: { items: typeof highlights }) {
+  return (
+    <>
+      <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => (
+        <li
+          key={`${item.company}-${item.title}`}
+          className="card offset-card group relative min-h-64 transition-transform duration-200 hover:-translate-y-1 hover:border-primary focus-within:border-primary"
+        >
+          <div className="card-body p-5">
+            <div className="flex items-start justify-between gap-4">
+              <span className={`badge rounded-none border-2 border-base-content px-3 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-widest ${item.color}`}>
+                {item.category}
+              </span>
+              <span className="font-mono text-right text-xs font-black uppercase text-base-content/45">
+                {item.year}
+              </span>
+            </div>
+            <div className="mt-auto pt-8">
+              <div className="font-mono text-xs font-bold uppercase tracking-wider text-base-content/60">
+                {item.title}
+              </div>
+              <h3 className="card-title mt-2 text-2xl leading-tight tracking-tight transition-colors group-hover:text-primary">
+                {item.company}
+              </h3>
+                <div className="mt-3 border-t-2 border-base-content/20 pt-3">
+                  <div className="font-mono text-xs text-base-content/45">{item.meta}</div>
+                  {item.short ? <p className="mt-3 font-mono text-sm text-base-content/65">{item.short}</p> : null}
+                </div>
+            </div>
+          </div>
+          {item.category !== "Research" ? (
+            <label
+              htmlFor={`experience-${item.company.replaceAll(" ", "-").toLowerCase()}`}
+              className="absolute inset-0 z-10 cursor-pointer rounded-none"
+              aria-label={`Open details for ${item.company}`}
+            />
+          ) : null}
+          {item.category === "Research" && item.href ? (
+            <Link
+              href={item.href}
+              className="absolute inset-0 z-10 rounded-none"
+              aria-label={`Read ${item.company}`}
+            />
+          ) : null}
+        </li>
+      ))}
+      </ol>
+      {items.filter((item) => item.category !== "Research").map((item) => {
+      const modalId = `experience-${item.company.replaceAll(" ", "-").toLowerCase()}`;
+
+      return (
+        <div key={modalId}>
+          <input type="checkbox" id={modalId} className="modal-toggle" />
+          <div className="modal" role="dialog" aria-modal="true">
+            <div className="modal-box rounded-none border-2 border-base-content bg-base-100 p-6 shadow-[8px_8px_0_var(--color-base-content)] sm:max-w-2xl sm:p-8">
+              <div className="flex items-start justify-between gap-6 border-b-2 border-base-content pb-5">
+                <div>
+                  <p className="eyebrow text-primary">{item.title}</p>
+                  <h3 className="mt-2 text-3xl font-black tracking-tight">{item.company}</h3>
+                </div>
+                <span className="font-mono text-right text-xs font-black uppercase text-base-content/45">{item.year}</span>
+              </div>
+              <div className="mt-6">
+                <p className="font-mono text-sm text-base-content/60">{item.meta}</p>
+              </div>
+              <div className="mt-6">
+                <p className="text-lg leading-relaxed text-base-content/80">{item.short}</p>
+              </div>
+              <div className="mt-6">
+                <p className="eyebrow mb-3 text-primary">Details</p>
+                <ul className="space-y-3 leading-relaxed text-base-content/75">
+                  {(item.details ?? [item.short]).map((detail) => <li key={detail}>— {detail}</li>)}
+                </ul>
+              </div>
+              {item.skills ? (
+                <div className="mt-6">
+                  <p className="eyebrow mb-3 text-primary">Skills</p>
+                  <div className="flex flex-wrap gap-2">
+                  {item.skills.map((skill) => <span key={skill} className="badge badge-outline rounded-none border-2">{skill}</span>)}
+                  </div>
+                </div>
+              ) : null}
+              <div className="modal-action">
+                <label htmlFor={modalId} className="btn btn-primary rounded-none border-2 border-base-content">Close</label>
+              </div>
+            </div>
+            <label className="modal-backdrop" htmlFor={modalId}>Close</label>
+          </div>
+        </div>
+      );
+      })}
+    </>
+  );
+}
+
+export default function FeatureSection() {
+  const projects = highlights.filter((item) => item.category === "Research");
+  const experience = highlights.filter((item) => item.category !== "Research");
+
+  return (
+    <>
+      <section className="border-t-2 border-base-content py-16 sm:py-24" aria-labelledby="experience-heading">
+        <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+          <div>
+            <p className="eyebrow mb-3 text-primary">Experience</p>
+            <h2 id="experience-heading" className="max-w-2xl text-4xl font-black tracking-tight sm:text-6xl">
+              Learning by building.
+            </h2>
+          </div>
+          <p className="max-w-sm text-base-content/65 sm:text-right">
+            Education, engineering, and interdisciplinary project work.
+          </p>
+        </div>
+        <HighlightGrid items={experience} />
+      </section>
+
+      <section className="border-t-2 border-base-content py-16 sm:py-24" aria-labelledby="projects-heading">
+      <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+        <div>
+          <p className="eyebrow mb-3 text-primary">Research</p>
+          <h2 id="projects-heading" className="max-w-2xl text-4xl font-black tracking-tight sm:text-6xl">
+            Selected projects
+          </h2>
+        </div>
+        <p className="max-w-sm text-base-content/65 sm:text-right">
+          Computer science research applying machine learning, computer vision, and computational optimization.
+        </p>
+      </div>
+      <HighlightGrid items={projects} />
+      </section>
+    </>
+  );
+}

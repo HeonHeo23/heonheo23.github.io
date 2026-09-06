@@ -1,31 +1,47 @@
-import { notFound } from "next/navigation";
+import type { ComponentType } from "react";
+import { useParams } from "react-router-dom";
+import Link from "../../components/Link";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
+const bookModules = import.meta.glob<{ default: ComponentType }>(
+  "../../../markdown/books/*.mdx",
+  { eager: true },
+);
 
-const page = async ({ params }: Props) => {
-  const { id } = await params;
+const Page = () => {
+  const { id } = useParams();
+  const BookMdx = id ? bookModules[`../../../markdown/books/${id}.mdx`]?.default : undefined;
 
-  let BookMdx;
-
-  try {
-    BookMdx = (await import(`@/markdown/books/${id}.mdx`)).default;
-  } catch (error) {
-    notFound(); // 404 if mdx doesn't exist
+  if (!BookMdx) {
+    return (
+      <main className="page-shell">
+        <h1 className="text-5xl font-black">Reading note not found</h1>
+        <Link href="/books" className="link mt-6 inline-block text-primary">Back to books</Link>
+      </main>
+    );
   }
 
   return (
-    <div className="flex min-h-screen justify-center font-sans">
-      <main className="flex w-full max-w-6xl flex-col py-4 px-8 md:px-2">
-        <h1>Books I have read</h1>
-        <h2>{id}</h2>
-        <BookMdx />
-      </main>
-    </div>
+    <main className="page-shell">
+      <div className="article-content">
+        <nav
+          className="breadcrumbs mb-10 border-b-2 border-base-content pb-5 font-mono text-xs font-bold uppercase tracking-widest"
+          aria-label="Breadcrumb"
+        >
+          <ul>
+            <li>
+              <Link href="/books" className="link-hover text-primary">
+                Books
+              </Link>
+            </li>
+            <li className="text-base-content/60">Reading note</li>
+          </ul>
+        </nav>
+        <article>
+          <BookMdx />
+        </article>
+      </div>
+    </main>
   );
 };
 
-export default page;
+export default Page;

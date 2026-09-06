@@ -1,39 +1,30 @@
+import { useState } from "react";
 import { ideaGraph } from "./lib/models/graph";
 import AddIdea from "./components/AddIdea";
-import { revalidatePath } from "next/cache";
 import IdeaTimeline from "./components/IdeaTimeline";
-import Link from "next/link";
+import Link from "../../components/Link";
 
-export const deleteIdeaAction = async (id: string) => {
-  "use server";
-  ideaGraph.deleteIdea(id);
-  revalidatePath("/"); // refresh the page
-};
-
-export const addIdeaAction = async (formData: FormData) => {
-  "use server";
-  const name = formData.get("name") as string;
-  const timestamp = new Date();
-  const description = formData.get("description") as string;
-  const originDateRaw = formData.get("originDate");
-  const originDate =
-    typeof originDateRaw === "string" && originDateRaw.trim() !== ""
-      ? Number(originDateRaw)
-      : 0;
-
-  ideaGraph.createIdea({
-    name: name,
-    description: description,
-    originDate: originDate,
-    createdAt: timestamp,
-    updatedAt: timestamp,
-  });
-  revalidatePath("/"); // refresh the page
-};
-
-const page = () => {
+const Page = () => {
+  const [, setRevision] = useState(0);
   const ideas = ideaGraph.getAllIdeas();
   const influences = ideaGraph.getAllInfluences();
+
+  const deleteIdea = (id: string) => {
+    ideaGraph.deleteIdea(id);
+    setRevision((value) => value + 1);
+  };
+
+  const addIdea = (formData: FormData) => {
+    const now = new Date();
+    ideaGraph.createIdea({
+      name: String(formData.get("name") ?? ""),
+      description: String(formData.get("description") ?? ""),
+      originDate: Number(formData.get("originDate") ?? 0),
+      createdAt: now,
+      updatedAt: now,
+    });
+    setRevision((value) => value + 1);
+  };
 
   return (
     <>
@@ -41,14 +32,14 @@ const page = () => {
       <IdeaTimeline
         ideas={ideas}
         influences={influences}
-        deleteIdea={deleteIdeaAction}
+        deleteIdea={deleteIdea}
       />
-      <AddIdea createIdea={addIdeaAction} />
+      <AddIdea createIdea={addIdea} />
       <button className="mt-2 btn btn-accent">
-        <Link href={"ideagraph/influence"}>Influences</Link>
+        <Link href="/swe/ideagraph/influence">Influences</Link>
       </button>
     </>
   );
 };
 
-export default page;
+export default Page;

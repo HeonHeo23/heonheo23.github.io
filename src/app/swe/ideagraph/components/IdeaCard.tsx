@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "../../../components/Link";
 import { Idea } from "../lib/types/idea";
 const IdeaCard = ({
   idea,

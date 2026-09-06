@@ -1,35 +1,23 @@
-import { redirect } from "next/navigation";
+import type { FormEvent } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ideaGraph } from "../../lib/models/graph";
 
-interface PageProps {
-  params: { id: string };
-}
+const Page = () => {
+  const { id = "" } = useParams();
+  const navigate = useNavigate();
+  const idea = ideaGraph.getIdea(id);
 
-export const updateIdeaAction = (id: string) => async (formData: FormData) => {
-  "use server";
-
-  const name = formData.get("name") as string;
-  const timestamp = new Date();
-  const description = formData.get("description") as string;
-  const originDateRaw = formData.get("originDate");
-  const originDate =
-    typeof originDateRaw === "string" && originDateRaw.trim() !== ""
-      ? Number(originDateRaw)
-      : 0;
-
-  ideaGraph.updateIdea(id, {
-    name: name,
-    description: description,
-    originDate: originDate,
-    createdAt: timestamp,
-    updatedAt: timestamp,
-  });
-  redirect(`/swe/ideagraph/${id}`);
-};
-
-const Page = async ({ params }: PageProps) => {
-  const { id } = await params;
-  const idea = await ideaGraph.getIdea(id);
+  const updateIdea = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    ideaGraph.updateIdea(id, {
+      name: String(formData.get("name") ?? ""),
+      description: String(formData.get("description") ?? ""),
+      originDate: Number(formData.get("originDate") ?? 0),
+      updatedAt: new Date(),
+    });
+    navigate(`/swe/ideagraph/${id}`);
+  };
 
   if (!idea) {
     return (
@@ -44,7 +32,7 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <form
-      action={updateIdeaAction(idea.id ?? "")}
+      onSubmit={updateIdea}
       className="flex flex-col mx-auto gap-4 w-full max-w-3xl"
     >
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">

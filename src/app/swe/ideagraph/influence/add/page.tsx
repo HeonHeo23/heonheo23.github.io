@@ -1,26 +1,26 @@
-import { redirect } from "next/navigation";
+import type { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { ideaGraph } from "@/app/swe/ideagraph/lib/models/graph";
 
-export const addInfluenceAction = async (formData: FormData) => {
-  "use server";
-  const fromId = formData.get("from") as string;
-  const toId = formData.get("to") as string;
-
-  ideaGraph.createInfluence({
-    fromId: fromId,
-    toId: toId,
-    strength: 0.3,
-    type: "",
-  });
-  redirect("/swe/ideagraph/"); // refresh the page
-};
-
-const page = () => {
+const Page = () => {
+  const navigate = useNavigate();
   const ideas = ideaGraph.getAllIdeas();
+
+  const addInfluence = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    ideaGraph.createInfluence({
+      fromId: String(formData.get("from") ?? ""),
+      toId: String(formData.get("to") ?? ""),
+      strength: Number(formData.get("strength") ?? 0.3),
+      type: "",
+    });
+    navigate("/swe/ideagraph");
+  };
 
   return (
     <form
-      action={addInfluenceAction}
+      onSubmit={addInfluence}
       className="flex flex-col mx-auto gap-4 w-full max-w-3xl"
     >
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

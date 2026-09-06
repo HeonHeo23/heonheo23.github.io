@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Software, language, systems, and reading notes by Heon Heo."
+    />
+    <link rel="icon" href="/src/app/favicon.ico" />
+    <title>Heon Heo</title>
+    <script>
+      (() => {
+        try {
+          const saved = localStorage.getItem("portfolio-theme");
+          document.documentElement.dataset.theme =
+            saved === "portfolio-light" || saved === "portfolio-dark"
+              ? saved
+              : matchMedia("(prefers-color-scheme: dark)").matches
+                ? "portfolio-dark"
+                : "portfolio-light";
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 import { Idea } from "../types/idea";
 import { Influence } from "../types/influence";
-import fs from "fs";
+import initialData from "../../../../../../ideagraph.json";
 
-const DATA_PATH = "ideagraph.json";
+const STORAGE_KEY = "heonheo-ideagraph";
 
 export interface IdeaWithStrength {
   idea: Idea;
@@ -14,33 +14,43 @@ interface Data {
   influences: Influence[];
 }
 
+const hydrate = (data: typeof initialData): Data => ({
+  ideas: data.ideas.map((idea) => ({
+    ...idea,
+    createdAt: new Date(idea.createdAt),
+    updatedAt: new Date(idea.updatedAt),
+  })),
+  influences: data.influences,
+});
+
 export class IdeaGraph {
   private ideas: Idea[] = [];
   private influences: Influence[] = [];
 
   constructor() {
-    this.loadFromFile();
+    this.load();
   }
 
-  private loadFromFile = () => {
-    if (!fs.existsSync(DATA_PATH)) {
-      fs.writeFileSync(
-        DATA_PATH,
-        JSON.stringify({ ideas: [], influences: [] }, null, 2)
-      );
+  private load = () => {
+    if (typeof window === "undefined") {
+      const data = hydrate(initialData);
+      this.ideas = data.ideas;
+      this.influences = data.influences;
+      return;
     }
-    const raw = fs.readFileSync(DATA_PATH, "utf-8");
-    const parsed = JSON.parse(raw) as Data;
 
-    this.ideas = parsed.ideas;
-    this.influences = parsed.influences;
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const parsed = raw ? (JSON.parse(raw) as typeof initialData) : initialData;
+    const data = hydrate(parsed);
+    this.ideas = data.ideas;
+    this.influences = data.influences;
   };
-  private saveToFile = () => {
+  private save = () => {
     const data: Data = {
       ideas: this.ideas,
       influences: this.influences,
     };
-    fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), "utf-8");
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   };
 
   createIdea = (data: Omit<Idea, "id">): Idea => {
@@ -49,24 +59,24 @@ export class IdeaGraph {
       ...data,
     };
     this.ideas.push(idea);
-    this.saveToFile();
+    this.save();
     return idea;
   };
   getIdea = (id: string): Idea | undefined => {
-    this.loadFromFile();
+    this.load();
     return this.ideas.find((i) => i.id == id);
   };
   getAllIdeas = (): Idea[] => {
-    this.loadFromFile();
+    this.load();
     return [...this.ideas].sort((a, b) => a.originDate - b.originDate);
   };
   updateIdea = (id: string, changes: Partial<Omit<Idea, "id">>) => {
-    this.loadFromFile();
+    this.load();
     const idea = this.getIdea(id);
     if (!idea) return undefined;
     Object.assign(idea, changes);
     console.log(idea);
-    this.saveToFile();
+    this.save();
     return idea;
   };
   deleteIdea = (id: string): boolean => {
@@ -77,7 +87,7 @@ export class IdeaGraph {
     this.influences = this.influences.filter(
       (inf) => inf.fromId !== id && inf.toId !== id
     );
-    this.saveToFile();
+    this.save();
     return true;
   };
 
@@ -93,7 +103,7 @@ export class IdeaGraph {
     };
 
     this.influences.push(influence);
-    this.saveToFile();
+    this.save();
     return influence;
   };
 
@@ -102,7 +112,7 @@ export class IdeaGraph {
   };
 
   getAllInfluences = () => {
-    this.loadFromFile();
+    this.load();
     return [...this.influences];
   };
 
@@ -111,7 +121,7 @@ export class IdeaGraph {
     if (!influence) return undefined;
 
     Object.assign(influence, changes);
-    this.saveToFile();
+    this.save();
     return influence;
   };
 
@@ -120,12 +130,12 @@ export class IdeaGraph {
     if (index === -1) return false;
 
     this.influences.splice(index, 1);
-    this.saveToFile();
+    this.save();
     return true;
   };
 
   getParents = (id: string): IdeaWithStrength[] => {
-    this.loadFromFile();
+    this.load();
     return this.influences
       .filter((inf) => inf.toId === id)
       .map((inf) => {
@@ -136,7 +146,7 @@ export class IdeaGraph {
   };
 
   getChildren = (id: string): IdeaWithStrength[] => {
-    this.loadFromFile();
+    this.load();
     return this.influences
       .filter((inf) => inf.fromId === id)
       .map((inf) => {
