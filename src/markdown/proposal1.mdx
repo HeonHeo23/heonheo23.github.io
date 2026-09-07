@@ -1,4 +1,5 @@
-# Semantic Event Mapping of New Testament Narrative  
+# Semantic Event Mapping of New Testament Narrative
+
 ## A Computational Study of the Gospel of Mark Using Semantic Role Labeling
 
 ---
@@ -74,8 +75,8 @@ The methodology consists of coordinated modules forming a complete pipeline from
 
 The corpus will consist of the Gospel of Mark in a standard academic English translation. Preprocessing will include:
 
-- sentence segmentation  
-- tokenization  
+- sentence segmentation
+- tokenization
 - verse alignment
 
 Outputs: structured sentences with identifiers and verse metadata.
@@ -84,9 +85,9 @@ Outputs: structured sentences with identifiers and verse metadata.
 
 A transformer based SRL model (PropBank style) will be used to identify:
 
-- predicates  
-- argument spans  
-- role labels  
+- predicates
+- argument spans
+- role labels
 
 Labels will then be normalized to a simplified set: agent, patient, experiencer, beneficiary, location, time, purpose, cause.
 
@@ -98,16 +99,16 @@ Only predicates representing narrative events will be selected. For each, an eve
 
 Event typing procedure:
 
-1. Collect predicate lemmas  
-2. Embed and cluster  
-3. Assign cluster labels such as:  
+1. Collect predicate lemmas
+2. Embed and cluster
+3. Assign cluster labels such as:
 
-   - teaching  
-   - healing  
-   - conflict  
-   - travel  
-   - speech  
-   - miracle  
+   - teaching
+   - healing
+   - conflict
+   - travel
+   - speech
+   - miracle
 
 ### 5.4 Entity Identification and Normalization
 
@@ -115,21 +116,21 @@ A canonical list of major entities (Jesus, disciples, Pharisees, crowds, etc.) w
 
 Argument spans will be mapped to canonical entities using:
 
-- rule based name matching  
-- lexicons  
-- pronoun resolution via proximity heuristics  
+- rule based name matching
+- lexicons
+- pronoun resolution via proximity heuristics
 
 ### 5.5 Event Map Construction
 
 Each event record will include:
 
-- event ID  
-- predicate lemma  
-- event type  
-- sentence ID  
-- verse reference  
-- participants and roles  
-- narrative order index  
+- event ID
+- predicate lemma
+- event type
+- sentence ID
+- verse reference
+- participants and roles
+- narrative order index
 
 Discourse markers like **and**, **but**, **when**, **then**, **because** will be extracted and used to infer event transitions.
 
@@ -139,18 +140,21 @@ The event map may be represented as a table or graph.
 
 Analyses include:
 
-#### Character Centered Patterns  
+#### Character Centered Patterns
+
 Frequencies of agents and patients across event types, focusing on major entities.
 
-#### Event Type Distributions  
+#### Event Type Distributions
+
 By chapter and narrative segment, identifying where miracles, teachings, or conflicts cluster.
 
-#### Episode Segmentation  
+#### Episode Segmentation
+
 Heuristics combining:
 
-- event type shifts  
-- location changes  
-- discourse markers  
+- event type shifts
+- location changes
+- discourse markers
 
 Results will be compared to traditional pericope boundaries.
 
@@ -169,12 +173,15 @@ Comparison of results to narrative critical scholarship on Mark.
 The project proceeds in three stages:
 
 ### 1. Conceptual Design
+
 Define schema, roles, event types, and entities. Low computational load.
 
 ### 2. Pilot Implementation on Mark
+
 Run the full pipeline, construct event map, and generate initial analyses.
 
 ### 3. Extension and Refinement
+
 Improve selection criteria, event typing, and entity rules. Sketch extension to other texts.
 
 Technical requirements: Python, NLP libraries, off the shelf semantic models.
@@ -183,10 +190,10 @@ Technical requirements: Python, NLP libraries, off the shelf semantic models.
 
 ## 7. Expected Contributions
 
-- A structured semantic event map of Mark with typed events and canonical participants  
-- A documented NLP pipeline for applying SRL and event extraction to ancient narrative  
-- Quantitative narrative structure descriptions  
-- A methodological template for extending computational analysis to other biblical texts  
+- A structured semantic event map of Mark with typed events and canonical participants
+- A documented NLP pipeline for applying SRL and event extraction to ancient narrative
+- Quantitative narrative structure descriptions
+- A methodological template for extending computational analysis to other biblical texts
 
 ---
 
@@ -194,17 +201,17 @@ Technical requirements: Python, NLP libraries, off the shelf semantic models.
 
 Limitations include:
 
-- reliance on English translation rather than Greek  
-- model domain mismatch  
-- approximate coreference and entity normalization  
-- coarse event classification  
+- reliance on English translation rather than Greek
+- model domain mismatch
+- approximate coreference and entity normalization
+- coarse event classification
 
 Future improvements may involve:
 
-- models adapted to biblical English  
-- integration with Greek linguistic data  
-- advanced coreference models  
-- expansion to Luke, Acts, and Johannine narrative  
+- models adapted to biblical English
+- integration with Greek linguistic data
+- advanced coreference models
+- expansion to Luke, Acts, and Johannine narrative
 
 ---
 

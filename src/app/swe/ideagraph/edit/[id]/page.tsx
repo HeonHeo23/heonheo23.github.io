@@ -23,7 +23,7 @@ const Page = () => {
     return (
       <div className="flex min-h-screen justify-center font-sans">
         <main className="flex w-full max-w-3xl flex-col py-4 px-8 md:px-4">
-          <h1 className="text-4xl font-bold text-red-600">Idea Not Found</h1>
+          <h1 className="text-4xl font-bold text-error">Idea Not Found</h1>
           <p>No idea exists with ID: {id}</p>
         </main>
       </div>
@@ -35,7 +35,7 @@ const Page = () => {
       onSubmit={updateIdea}
       className="flex flex-col mx-auto gap-4 w-full max-w-3xl"
     >
-      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+      <fieldset className="fieldset w-full p-5">
         <legend className="fieldset-legend">Update Idea</legend>
         <label className="input w-full">
           <span className="label w-30">Name</span>

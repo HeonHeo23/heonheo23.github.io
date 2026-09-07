@@ -10,7 +10,7 @@ const components: MDXComponents = {
   h2: (props) => (
     <h2
       {...props}
-      className="mb-4 mt-14 border-t-2 border-base-300 pt-7 text-3xl font-black leading-tight tracking-tight text-base-content sm:text-4xl"
+      className="mb-4 mt-14 border-t-[4px] border-base-content pt-7 text-3xl font-black leading-tight tracking-tight text-base-content sm:text-4xl"
     />
   ),
   h3: (props) => (
@@ -38,7 +38,10 @@ const components: MDXComponents = {
     />
   ),
   ul: (props) => (
-    <ul {...props} className="my-6 ml-6 list-disc space-y-2 marker:text-primary" />
+    <ul
+      {...props}
+      className="my-6 ml-6 list-disc space-y-2 marker:text-primary"
+    />
   ),
   ol: (props) => (
     <ol
@@ -46,29 +49,36 @@ const components: MDXComponents = {
       className="my-6 ml-6 list-decimal space-y-2 marker:font-mono marker:font-bold marker:text-primary"
     />
   ),
-  li: (props) => <li {...props} className="pl-2 leading-7 text-base-content/80" />,
+  li: (props) => (
+    <li {...props} className="pl-2 leading-7 text-base-content/80" />
+  ),
   blockquote: (props) => (
     <blockquote
       {...props}
-      className="my-8 border-l-8 border-secondary bg-base-200 px-6 py-2 text-lg font-medium italic text-base-content"
+      className="my-8 border-l-[8px] border-secondary bg-base-200 px-6 py-4 text-lg font-medium italic text-base-content"
     />
   ),
   pre: (props) => (
     <pre
       {...props}
-      className="my-8 overflow-x-auto border-2 border-base-content bg-neutral p-5 text-sm leading-7 text-neutral-content shadow-[5px_5px_0_0_var(--color-primary)]"
+      className="my-8 overflow-x-auto border-[3px] border-base-content bg-neutral p-5 text-sm leading-7 text-neutral-content shadow-[5px_5px_0_0_var(--color-base-content)]"
     />
   ),
   code: (props) => (
     <code
       {...props}
-      className="border border-base-300 bg-base-200 px-1.5 py-0.5 font-mono text-[0.9em] font-semibold text-base-content"
+      className="border-2 border-base-content bg-base-200 px-1.5 py-0.5 font-mono text-[0.9em] font-semibold text-base-content"
     />
   ),
-  hr: (props) => <hr {...props} className="my-12 border-t-2 border-base-content" />,
+  hr: (props) => (
+    <hr {...props} className="my-12 border-t-2 border-base-content" />
+  ),
   img: (props) => (
     // MDX images may be remote or authored directly in notes.
-    <img {...props} className="my-8 h-auto max-w-full border-2 border-base-content" />
+    <img
+      {...props}
+      className="my-8 h-auto max-w-full border-[3px] border-base-content shadow-[5px_5px_0_0_var(--color-base-content)]"
+    />
   ),
   table: (props) => (
     <table
@@ -79,13 +89,18 @@ const components: MDXComponents = {
   th: (props) => (
     <th
       {...props}
-      className="border-2 border-base-content bg-primary px-4 py-3 text-left text-primary-content"
+      className="border-[3px] border-base-content bg-primary px-4 py-3 text-left text-primary-content"
     />
   ),
   td: (props) => (
-    <td {...props} className="border-2 border-base-content px-4 py-3 text-base-content/80" />
+    <td
+      {...props}
+      className="border-[3px] border-base-content px-4 py-3 text-base-content/80"
+    />
   ),
-  strong: (props) => <strong {...props} className="font-black text-base-content" />,
+  strong: (props) => (
+    <strong {...props} className="font-black text-base-content" />
+  ),
 };
 
 export const mdxComponents = components;

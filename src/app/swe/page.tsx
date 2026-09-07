@@ -1,40 +1,46 @@
 import IdeaGraph from "@/markdown/ideaGraph.mdx";
 import Link from "../components/Link";
+import PageHeader from "../components/PageHeader";
+import { neuToneClass, type NeuTone } from "../components/design";
 
-const projects = [
+const projects: {
+  title: string;
+  description: string;
+  href: string;
+  label: string;
+  tone: NeuTone;
+}[] = [
   {
     title: "Idea Graph",
-    description: "Explore ideas, their lineage, and the relationships between them.",
+    description:
+      "Explore ideas, their lineage, and the relationships between them.",
     href: "/swe/ideagraph",
     label: "Knowledge systems",
-    color: "bg-primary text-primary-content",
+    tone: "yellow",
   },
   {
     title: "Denomination Game",
-    description: "An interactive simulation of factions, stances, and authority.",
+    description:
+      "An interactive simulation of factions, stances, and authority.",
     href: "https://heonheo23.github.io/the-denomination/",
     label: "Simulation",
-    color: "bg-secondary text-secondary-content",
+    tone: "pink",
   },
 ];
 
 const Page = () => {
   return (
     <main className="page-shell">
-      <header className="mb-12 max-w-4xl">
-        <nav className="breadcrumbs eyebrow mb-4 text-primary" aria-label="Breadcrumb">
-          <ul>
-            <li aria-current="page">SWE</li>
-          </ul>
-        </nav>
-        <h1 className="text-5xl font-black tracking-tight sm:text-7xl">Projects as experiments.</h1>
-        <p className="mt-6 max-w-2xl text-xl leading-relaxed text-base-content/70">
-          Working software and evolving prototypes for modeling ideas and systems.
-        </p>
-      </header>
+      <PageHeader
+        eyebrow="SWE"
+        title="Projects as experiments."
+        description="Working software and evolving prototypes for modeling ideas and systems."
+      />
 
       <section aria-labelledby="project-list-heading">
-        <h2 id="project-list-heading" className="sr-only">Project list</h2>
+        <h2 id="project-list-heading" className="sr-only">
+          Project list
+        </h2>
         <ul className="grid gap-6 md:grid-cols-2">
           {projects.map((project, index) => (
             <li key={project.href}>
@@ -43,7 +49,9 @@ const Page = () => {
                 className="offset-card group flex min-h-72 flex-col p-6 transition-transform hover:-translate-y-1"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <span className={`badge rounded-none border-2 border-base-content px-3 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-widest ${project.color}`}>
+                  <span
+                    className={`badge px-3 py-3 text-[0.65rem] uppercase tracking-widest ${neuToneClass[project.tone]}`}
+                  >
                     {project.label}
                   </span>
                   <span className="font-mono text-sm font-black text-base-content/45">
@@ -64,7 +72,7 @@ const Page = () => {
         </ul>
       </section>
 
-      <article className="article-content mt-24 border-t-8 border-accent pt-16">
+      <article className="article-content mt-24 border-t-[4px] border-base-content pt-16">
         <IdeaGraph />
       </article>
     </main>

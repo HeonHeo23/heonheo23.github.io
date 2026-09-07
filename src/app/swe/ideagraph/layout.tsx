@@ -6,10 +6,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex min-h-screen justify-center font-sans">
-      <main className="flex w-full max-w-6xl flex-col py-4 px-8 md:px-4">
+    <div className="mx-auto flex w-full max-w-6xl flex-col px-5 py-10 sm:px-8">
+      <main className="neu-surface flex w-full flex-col p-5 sm:p-8">
         <Link href={`/swe/ideagraph`}>
-          <h1 className="content-center text-6xl font-extrabold link-hover mb-4">IdeaGraph</h1>
+          <h1 className="font-display mb-6 border-b-[4px] border-base-content pb-5 text-5xl font-extrabold sm:text-6xl">
+            IdeaGraph<span className="text-secondary">.</span>
+          </h1>
         </Link>
         {children}
       </main>

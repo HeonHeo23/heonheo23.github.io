@@ -42,7 +42,13 @@ function PageMeta() {
   return null;
 }
 
-function InLayout({ layout: Layout, children }: { layout: ComponentType<{ children: ReactNode }>; children: ReactNode }) {
+function InLayout({
+  layout: Layout,
+  children,
+}: {
+  layout: ComponentType<{ children: ReactNode }>;
+  children: ReactNode;
+}) {
   return <Layout>{children}</Layout>;
 }
 
@@ -50,7 +56,9 @@ function NotFound() {
   return (
     <main className="page-shell">
       <h1 className="text-5xl font-black">Page not found</h1>
-      <p className="mt-4 text-base-content/70">The requested page does not exist.</p>
+      <p className="mt-4 text-base-content/70">
+        The requested page does not exist.
+      </p>
     </main>
   );
 }
@@ -67,11 +75,46 @@ export default function App() {
         <Route path="/research" element={<ResearchPage />} />
         <Route path="/research/:slug" element={<ResearchDetailPage />} />
         <Route path="/swe" element={<SwePage />} />
-        <Route path="/swe/ideagraph" element={<InLayout layout={IdeaGraphLayout}><IdeaGraphPage /></InLayout>} />
-        <Route path="/swe/ideagraph/influence" element={<InLayout layout={IdeaGraphLayout}><InfluencePage /></InLayout>} />
-        <Route path="/swe/ideagraph/influence/add" element={<InLayout layout={IdeaGraphLayout}><AddInfluencePage /></InLayout>} />
-        <Route path="/swe/ideagraph/edit/:id" element={<InLayout layout={IdeaGraphLayout}><EditIdeaPage /></InLayout>} />
-        <Route path="/swe/ideagraph/:id" element={<InLayout layout={IdeaGraphLayout}><IdeaPage /></InLayout>} />
+        <Route
+          path="/swe/ideagraph"
+          element={
+            <InLayout layout={IdeaGraphLayout}>
+              <IdeaGraphPage />
+            </InLayout>
+          }
+        />
+        <Route
+          path="/swe/ideagraph/influence"
+          element={
+            <InLayout layout={IdeaGraphLayout}>
+              <InfluencePage />
+            </InLayout>
+          }
+        />
+        <Route
+          path="/swe/ideagraph/influence/add"
+          element={
+            <InLayout layout={IdeaGraphLayout}>
+              <AddInfluencePage />
+            </InLayout>
+          }
+        />
+        <Route
+          path="/swe/ideagraph/edit/:id"
+          element={
+            <InLayout layout={IdeaGraphLayout}>
+              <EditIdeaPage />
+            </InLayout>
+          }
+        />
+        <Route
+          path="/swe/ideagraph/:id"
+          element={
+            <InLayout layout={IdeaGraphLayout}>
+              <IdeaPage />
+            </InLayout>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </RootLayout>

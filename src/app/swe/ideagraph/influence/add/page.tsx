@@ -23,14 +23,14 @@ const Page = () => {
       onSubmit={addInfluence}
       className="flex flex-col mx-auto gap-4 w-full max-w-3xl"
     >
-      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+      <fieldset className="fieldset w-full p-5">
         <legend className="fieldset-legend">New Influence</legend>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col">
             {ideas.map((i, idx) => (
               <label
                 key={idx}
-                className="cursor-pointer flex items-center gap-2"
+                className="cursor-pointer flex items-center gap-2 font-mono text-sm"
               >
                 <input
                   type="radio"
@@ -46,7 +46,7 @@ const Page = () => {
             {ideas.map((i, idx) => (
               <label
                 key={idx}
-                className="cursor-pointer flex items-center gap-2"
+                className="cursor-pointer flex items-center gap-2 font-mono text-sm"
               >
                 <input type="radio" name="to" className="radio" value={i.id} />
                 {i.name}

@@ -85,7 +85,7 @@ export class IdeaGraph {
 
     this.ideas.splice(index, 1);
     this.influences = this.influences.filter(
-      (inf) => inf.fromId !== id && inf.toId !== id
+      (inf) => inf.fromId !== id && inf.toId !== id,
     );
     this.save();
     return true;

@@ -35,9 +35,12 @@ const Page = () => {
         deleteIdea={deleteIdea}
       />
       <AddIdea createIdea={addIdea} />
-      <button className="mt-2 btn btn-accent">
-        <Link href="/swe/ideagraph/influence">Influences</Link>
-      </button>
+      <Link
+        href="/swe/ideagraph/influence"
+        className="btn btn-accent mt-4 self-start"
+      >
+        Influences
+      </Link>
     </>
   );
 };

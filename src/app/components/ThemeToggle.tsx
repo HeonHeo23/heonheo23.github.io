@@ -24,7 +24,7 @@ export default function ThemeToggle() {
 
   return (
     <div className="tooltip tooltip-left" data-tip="Toggle color theme">
-      <label className="swap swap-rotate btn btn-ghost btn-square">
+      <label className="swap swap-rotate btn btn-square bg-base-100">
         <input
           ref={inputRef}
           type="checkbox"

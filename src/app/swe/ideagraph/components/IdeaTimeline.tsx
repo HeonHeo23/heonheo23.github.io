@@ -62,7 +62,7 @@ const computeThresholds = (ideas: Idea[], mode: ClusterGapMode) => {
 const computePlacedIdeas = (
   ideas: Idea[],
   cardWidth: number,
-  mode: ClusterGapMode
+  mode: ClusterGapMode,
 ): PlacedIdea[] => {
   if (ideas.length === 0) return [];
 
@@ -115,7 +115,7 @@ const buildEdgePath = (
   startX: number,
   startY: number,
   endX: number,
-  endY: number
+  endY: number,
 ) => {
   if (mode === "Straight") {
     return `M ${startX} ${startY} L ${endX} ${endY}`;
@@ -143,7 +143,7 @@ const IdeaTimeline = ({
 
   const placed = useMemo(
     () => computePlacedIdeas(ideas, cardWidth, clusterGapMode),
-    [ideas, cardWidth, clusterGapMode]
+    [ideas, cardWidth, clusterGapMode],
   );
 
   const positionById = useMemo(() => buildPositionMap(placed), [placed]);
@@ -189,7 +189,7 @@ const IdeaTimeline = ({
           strokeWidth={isActive ? 3 : 1.5 + (inf.strength ?? 1) * 0.5}
           opacity={isActive ? 0.9 : 0.12}
           markerEnd="url(#arrow)"
-          className={isActive ? "text-primary" : "text-base-400"}
+          className={isActive ? "text-secondary" : "text-base-content"}
         />
       );
 
@@ -201,20 +201,22 @@ const IdeaTimeline = ({
   }, [influences, positionById, cardWidth, hoveredIdeaId, lineMode]);
 
   return (
-    <div className="w-full overflow-x-auto">
-      <div className="ml-auto max-w-3xl flex justify-between">
+    <div className="w-full overflow-x-auto border-[3px] border-base-content bg-base-200 p-4">
+      <div className="mb-5 flex min-w-max justify-between gap-8">
         <div className="mb-4 flex items-center gap-2">
-          <label className="text-sm text-base-500">Cluster gap</label>
+          <label className="font-mono text-sm font-bold uppercase text-base-content">
+            Cluster gap
+          </label>
           <select
             value={clusterGapMode}
             onChange={(e) =>
               setClusterGapMode(
                 e.target.value === "auto"
                   ? "auto"
-                  : (Number(e.target.value) as 50 | 100)
+                  : (Number(e.target.value) as 50 | 100),
               )
             }
-            className="rounded border border-base-300 bg-base-100 px-2 py-1 text-sm"
+            className="select select-sm border-[3px] border-base-content bg-base-100 font-mono text-sm"
           >
             <option value="auto">Auto</option>
             <option value="50">50 years</option>
@@ -223,11 +225,13 @@ const IdeaTimeline = ({
         </div>
 
         <div className="mb-4 flex items-center gap-2">
-          <label className="text-sm text-base-500">Edge style</label>
+          <label className="font-mono text-sm font-bold uppercase text-base-content">
+            Edge style
+          </label>
           <select
             value={lineMode}
             onChange={(e) => setLineMode(e.target.value as LineMode)}
-            className="rounded border border-base-300 bg-base-100 px-2 py-1 text-sm"
+            className="select select-sm border-[3px] border-base-content bg-base-100 font-mono text-sm"
           >
             <option value="Cubic Bezier">Cubic Bezier</option>
             <option value="Straight">Straight</option>
@@ -263,8 +267,9 @@ const IdeaTimeline = ({
             y1={0}
             x2={spineX}
             y2={height}
-            className="stroke-base-300"
-            strokeWidth={2}
+            className="stroke-base-content"
+            strokeOpacity={0.35}
+            strokeWidth={3}
           />
 
           {placed.map(({ idea, x, y }) => {
@@ -276,8 +281,9 @@ const IdeaTimeline = ({
                 y1={centerY}
                 x2={x}
                 y2={centerY}
-                className="stroke-base-300"
-                strokeWidth={2}
+                className="stroke-base-content"
+                strokeOpacity={0.35}
+                strokeWidth={3}
               />
             );
           })}

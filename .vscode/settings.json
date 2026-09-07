@@ -1,5 +1,11 @@
 {
-    "editor.tabSize": 2,        // Change to 2, 4, 8, etc.
-    "editor.insertSpaces": true, // true = spaces, false = tabs
-    "editor.detectIndentation": false // Ensures your setting is enforced
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "[javascript][javascriptreact][typescript][typescriptreact][json][css][md][mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   }
+}

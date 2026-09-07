@@ -8,7 +8,7 @@ const AddIdea = ({
   return (
     <>
       <button
-        className="btn btn-primary"
+        className="btn btn-primary mt-4 self-start"
         onClick={() =>
           (
             document.getElementById("add-idea-modal") as HTMLDialogElement
@@ -18,12 +18,12 @@ const AddIdea = ({
         Create Idea
       </button>
       <dialog id="add-idea-modal" className="modal">
-        <div className="modal-box">
+        <div className="modal-box p-6 sm:p-8">
           <form
             action={createIdea}
             className="flex flex-col mx-auto gap-4 w-full max-w-3xl"
           >
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+            <fieldset className="fieldset w-full p-5">
               <legend className="fieldset-legend">New Idea</legend>
               <label className="input w-full">
                 <span className="label w-30">Name</span>
@@ -52,19 +52,19 @@ const AddIdea = ({
                 />
               </label>
               {/* <div className="modal-action"> */}
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={() =>
-                    (
-                      document.getElementById(
-                        "add-idea-modal"
-                      ) as HTMLDialogElement
-                    )?.close()
-                  }
-                >
-                  Create Idea
-                </button>
+              <button
+                type="submit"
+                className="btn btn-primary mt-2 self-start"
+                onClick={() =>
+                  (
+                    document.getElementById(
+                      "add-idea-modal",
+                    ) as HTMLDialogElement
+                  )?.close()
+                }
+              >
+                Create Idea
+              </button>
               {/* </div> */}
             </fieldset>
           </form>

@@ -28,7 +28,8 @@ export const papers: ResearchPaper[] = [
     published: "FEB 2026",
     publishedDate: "February 23, 2026",
     type: "Journal article",
-    title: "Deep learning-assisted cytological image analysis for canine lymphoma",
+    title:
+      "Deep learning-assisted cytological image analysis for canine lymphoma",
     authors:
       "Chanel Shum*, Donghee Lee*, Hyunji Jo, Joanne Kim, Heon Heo, Shir Gilor, Christopher Lanier, Kevin Hall, Michael Dark, Jong Hyuk Kim, Cleverson de Souza",
     venue: "Veterinary Oncology",
@@ -56,7 +57,8 @@ export const papers: ResearchPaper[] = [
     published: "SEP 2025",
     publishedDate: "September 18, 2025",
     type: "Conference Proceeding",
-    title: "Structured inverse design: a tile-based approach for practical photonic integration",
+    title:
+      "Structured inverse design: a tile-based approach for practical photonic integration",
     authors:
       "Isaac Yu*, Heon Heo*, Byeongkwan Jeon*, Belal Jahannia, Abdolah Amirany, Hamed Dalir, Elham Heidari",
     venue: "Optical Design Automation",
@@ -78,6 +80,10 @@ export const papers: ResearchPaper[] = [
       conclusions:
         "Tile-based direct binary search offers a structured route toward scalable, fabrication-compatible photonic integration without relying on continuous or post-processed layouts.",
     },
-    tags: ["Computational optimization", "FDTD simulation", "Design automation"],
+    tags: [
+      "Computational optimization",
+      "FDTD simulation",
+      "Design automation",
+    ],
   },
 ];

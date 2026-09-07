@@ -9,13 +9,17 @@ const bookModules = import.meta.glob<{ default: ComponentType }>(
 
 const Page = () => {
   const { id } = useParams();
-  const BookMdx = id ? bookModules[`../../../markdown/books/${id}.mdx`]?.default : undefined;
+  const BookMdx = id
+    ? bookModules[`../../../markdown/books/${id}.mdx`]?.default
+    : undefined;
 
   if (!BookMdx) {
     return (
       <main className="page-shell">
         <h1 className="text-5xl font-black">Reading note not found</h1>
-        <Link href="/books" className="link mt-6 inline-block text-primary">Back to books</Link>
+        <Link href="/books" className="link mt-6 inline-block text-primary">
+          Back to books
+        </Link>
       </main>
     );
   }
