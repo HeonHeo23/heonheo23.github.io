@@ -4,25 +4,25 @@ const components: MDXComponents = {
   h1: (props) => (
     <h1
       {...props}
-      className="mb-8 mt-4 text-4xl font-black leading-tight tracking-tight text-base-content sm:text-6xl"
+      className="mt-4 mb-8 text-4xl leading-tight font-black tracking-tight text-base-content sm:text-6xl"
     />
   ),
   h2: (props) => (
     <h2
       {...props}
-      className="mb-4 mt-14 border-t-[4px] border-base-content pt-7 text-3xl font-black leading-tight tracking-tight text-base-content sm:text-4xl"
+      className="mt-14 mb-4 border-t-4 border-base-content pt-7 text-3xl leading-tight font-black tracking-tight text-base-content sm:text-4xl"
     />
   ),
   h3: (props) => (
     <h3
       {...props}
-      className="mb-3 mt-10 text-2xl font-bold leading-snug text-primary sm:text-3xl"
+      className="mt-10 mb-3 text-2xl leading-snug font-bold text-primary sm:text-3xl"
     />
   ),
   h4: (props) => (
     <h4
       {...props}
-      className="mb-2 mt-8 font-mono text-lg font-bold uppercase tracking-wide text-base-content"
+      className="mt-8 mb-2 font-mono text-lg font-bold tracking-wide text-base-content uppercase"
     />
   ),
   p: (props) => (
@@ -55,13 +55,13 @@ const components: MDXComponents = {
   blockquote: (props) => (
     <blockquote
       {...props}
-      className="my-8 border-l-[8px] border-secondary bg-base-200 px-6 py-4 text-lg font-medium italic text-base-content"
+      className="my-8 border-l-8 border-secondary bg-base-200 px-6 py-4 text-lg font-medium text-base-content italic"
     />
   ),
   pre: (props) => (
     <pre
       {...props}
-      className="my-8 overflow-x-auto border-[3px] border-base-content bg-neutral p-5 text-sm leading-7 text-neutral-content shadow-[5px_5px_0_0_var(--color-base-content)]"
+      className="my-8 overflow-x-auto neu-frame-md bg-neutral p-5 text-sm leading-7 text-neutral-content"
     />
   ),
   code: (props) => (
@@ -75,27 +75,24 @@ const components: MDXComponents = {
   ),
   img: (props) => (
     // MDX images may be remote or authored directly in notes.
-    <img
-      {...props}
-      className="my-8 h-auto max-w-full border-[3px] border-base-content shadow-[5px_5px_0_0_var(--color-base-content)]"
-    />
+    <img {...props} className="my-8 h-auto max-w-full neu-frame-md" />
   ),
   table: (props) => (
     <table
       {...props}
-      className="my-8 block w-full overflow-x-auto border-collapse font-mono text-sm"
+      className="my-8 block w-full border-collapse overflow-x-auto font-mono text-sm"
     />
   ),
   th: (props) => (
     <th
       {...props}
-      className="border-[3px] border-base-content bg-primary px-4 py-3 text-left text-primary-content"
+      className="border-3 border-base-content bg-primary px-4 py-3 text-left text-primary-content"
     />
   ),
   td: (props) => (
     <td
       {...props}
-      className="border-[3px] border-base-content px-4 py-3 text-base-content/80"
+      className="border-3 border-base-content px-4 py-3 text-base-content/80"
     />
   ),
   strong: (props) => (

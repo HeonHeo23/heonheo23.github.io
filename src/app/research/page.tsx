@@ -17,52 +17,50 @@ export default function ResearchPage() {
           href={scholarProfile}
           target="_blank"
           rel="noreferrer"
-          className="btn btn-outline rounded-none border-2 border-base-content"
+          className="btn btn-outline"
         >
           Google Scholar ↗
         </Link>
       </PageHeader>
 
       <section aria-labelledby="papers-heading">
-        <div className="mb-8 flex items-end justify-between gap-4">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <h2
             id="papers-heading"
             className="text-3xl font-black tracking-tight sm:text-4xl"
           >
             Selected papers
           </h2>
-          <span className="badge badge-outline rounded-none font-mono font-bold">
-            {papers.length} works
-          </span>
+          <span className="tag badge-outline">{papers.length} works</span>
         </div>
 
         <div className="space-y-8">
           {papers.map((paper) => (
-            <article key={paper.slug} className="card offset-card">
+            <article key={paper.slug} className="card neu-card">
               <div className="card-body p-6 sm:p-8">
                 <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="flex flex-wrap gap-2">
-                    <span className="badge badge-primary rounded-none font-mono font-bold uppercase tracking-wider">
+                  <div className="tag-list">
+                    <span className="tag uppercase badge-primary">
                       {paper.type}
                     </span>
                     {paper.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="badge badge-outline rounded-none"
+                        className="tag badge-outline tracking-normal"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <span className="font-mono text-sm font-black uppercase tracking-wider text-base-content/45">
+                  <span className="date text-sm text-base-content/45">
                     {paper.published}
                   </span>
                 </div>
 
-                <h3 className="card-title mt-8 max-w-4xl text-2xl leading-tight sm:text-4xl">
+                <h3 className="mt-8 card-title max-w-4xl text-2xl leading-tight sm:text-4xl">
                   <Link
                     href={`/research/${paper.slug}`}
-                    className="hover:text-primary"
+                    className="hover:text-accent hover:underline"
                   >
                     {paper.title}
                   </Link>
@@ -88,7 +86,7 @@ export default function ResearchPage() {
                     href={`https://doi.org/${paper.doi}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="link link-hover text-primary"
+                    className="link link-accent link-hover"
                   >
                     {paper.doi}
                   </Link>
@@ -97,16 +95,16 @@ export default function ResearchPage() {
                 <div className="divider my-4" />
 
                 <div className="max-w-4xl">
-                  <p className="eyebrow mb-3 text-primary">Abstract</p>
+                  <p className="mb-3 eyebrow text-secondary">Summary</p>
                   <p className="leading-relaxed text-base-content/80">
                     {paper.abstract}
                   </p>
                 </div>
 
-                <div className="card-actions mt-6">
+                <div className="mt-6 card-actions">
                   <Link
                     href={`/research/${paper.slug}`}
-                    className="btn btn-outline rounded-none border-2 border-base-content"
+                    className="btn border-2 btn-outline"
                   >
                     More ↗
                   </Link>
@@ -114,7 +112,7 @@ export default function ResearchPage() {
                     href={paper.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="btn btn-primary rounded-none border-2 border-base-content"
+                    className="btn border-2 btn-primary"
                   >
                     Read paper ↗
                   </Link>

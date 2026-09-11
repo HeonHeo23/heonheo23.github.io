@@ -26,6 +26,39 @@ type Position = {
 type ClusterGapMode = "auto" | 50 | 100;
 type LineMode = "Cubic Bezier" | "Straight";
 
+type TimelineSelectProps<Value extends string> = {
+  label: string;
+  value: Value;
+  options: { label: string; value: Value }[];
+  onChange: (value: Value) => void;
+};
+
+function TimelineSelect<Value extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: TimelineSelectProps<Value>) {
+  return (
+    <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+      <label className="text-mono shrink-0 text-sm font-bold tracking-wider text-base-content">
+        {label}
+      </label>
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value as Value)}
+        className="select border-3 border-base-content bg-base-100 select-sm font-mono text-sm"
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
 const ROW_HEIGHT = 120;
 const CARD_HEIGHT = 96;
 const EDGE_OFFSET = 24;
@@ -201,48 +234,37 @@ const IdeaTimeline = ({
   }, [influences, positionById, cardWidth, hoveredIdeaId, lineMode]);
 
   return (
-    <div className="w-full overflow-x-auto border-[3px] border-base-content bg-base-200 p-4">
-      <div className="mb-5 flex min-w-max justify-between gap-8">
-        <div className="mb-4 flex items-center gap-2">
-          <label className="font-mono text-sm font-bold uppercase text-base-content">
-            Cluster gap
-          </label>
-          <select
-            value={clusterGapMode}
-            onChange={(e) =>
-              setClusterGapMode(
-                e.target.value === "auto"
-                  ? "auto"
-                  : (Number(e.target.value) as 50 | 100),
-              )
-            }
-            className="select select-sm border-[3px] border-base-content bg-base-100 font-mono text-sm"
-          >
-            <option value="auto">Auto</option>
-            <option value="50">50 years</option>
-            <option value="100">100 years</option>
-          </select>
-        </div>
-
-        <div className="mb-4 flex items-center gap-2">
-          <label className="font-mono text-sm font-bold uppercase text-base-content">
-            Edge style
-          </label>
-          <select
-            value={lineMode}
-            onChange={(e) => setLineMode(e.target.value as LineMode)}
-            className="select select-sm border-[3px] border-base-content bg-base-100 font-mono text-sm"
-          >
-            <option value="Cubic Bezier">Cubic Bezier</option>
-            <option value="Straight">Straight</option>
-          </select>
-        </div>
+    <div className="w-full overflow-x-auto neu-frame-md bg-base-200 p-4">
+      <div className="mb-5 flex w-full min-w-max justify-between">
+        <TimelineSelect
+          label="Cluster gap"
+          value={String(clusterGapMode)}
+          onChange={(value) =>
+            setClusterGapMode(
+              value === "auto" ? "auto" : (Number(value) as 50 | 100),
+            )
+          }
+          options={[
+            { label: "Auto", value: "auto" },
+            { label: "50 years", value: "50" },
+            { label: "100 years", value: "100" },
+          ]}
+        />
+        <TimelineSelect
+          label="Edge style"
+          value={lineMode}
+          onChange={setLineMode}
+          options={[
+            { label: "Cubic Bezier", value: "Cubic Bezier" },
+            { label: "Straight", value: "Straight" },
+          ]}
+        />
       </div>
 
       <div className="relative mx-auto" style={{ width, height }}>
         {/* Bottom SVG: inactive edges (behind cards) */}
         <svg
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           width={width}
           height={height}
         >
@@ -311,7 +333,7 @@ const IdeaTimeline = ({
 
         {/* Top SVG: active edges (in front of cards) */}
         <svg
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           width={width}
           height={height}
           style={{ zIndex: 20 }}

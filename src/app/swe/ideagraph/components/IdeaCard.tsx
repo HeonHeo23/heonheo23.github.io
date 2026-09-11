@@ -23,7 +23,7 @@ const IdeaCard = ({
       <button
         type="button"
         aria-label="Delete idea"
-        className="btn btn-square btn-xs absolute top-3 right-3 z-10 border-2 bg-secondary text-secondary-content"
+        className="btn absolute top-3 right-3 z-10 btn-square border-2 bg-secondary text-secondary-content btn-xs"
         onClick={(e) => {
           e.stopPropagation(); // stop Link click
           if (deleteIdea) deleteIdea(idea.id);
@@ -46,12 +46,12 @@ const IdeaCard = ({
       </button>
 
       <Link
-        href={`/swe/ideagraph/${idea.id}`}
-        className="card offset-card h-full min-h-24 p-3 pr-10 cursor-pointer"
+        href={`/projects/ideagraph/${idea.id}`}
+        className="card h-full min-h-24 neu-card cursor-pointer p-3 pr-10"
       >
-        <div className="flex card-title text-base font-semibold">
+        <div className="card-title flex text-base font-semibold">
           <h3>{idea.name}</h3>
-          <span className="text-secondary text-xs">{idea.originDate}</span>
+          <span className="text-xs text-secondary">{idea.originDate}</span>
         </div>
         <p className="mt-2 text-xs text-base-content/75">{compactText}</p>
       </Link>

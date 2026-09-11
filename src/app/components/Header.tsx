@@ -3,14 +3,8 @@
 import { useLocation } from "react-router-dom";
 import Link from "./Link";
 import ThemeToggle from "./ThemeToggle";
-
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Compling", href: "/compling" },
-  { name: "Research", href: "/research" },
-  { name: "SWE", href: "/swe" },
-  { name: "Books", href: "/books" },
-];
+import { cn } from "./cn";
+import { siteNavigation } from "./navigation";
 
 function isActiveRoute(pathname: string, href: string) {
   return href === "/" ? pathname === href : pathname.startsWith(href);
@@ -22,11 +16,11 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b-4 border-base-content bg-base-100">
       <div className="site-shell">
-        <div className="navbar min-h-16 px-0">
+        <div className="navbar h-16 min-h-16 px-0">
           <div className="navbar-start gap-2">
             <details className="dropdown lg:hidden">
               <summary
-                className="btn btn-square bg-base-100 list-none"
+                className="btn btn-square list-none bg-base-100"
                 aria-label="Open navigation menu"
               >
                 <svg
@@ -45,15 +39,15 @@ export default function Header() {
                   />
                 </svg>
               </summary>
-              <ul className="site-nav menu dropdown-content z-10 mt-3 w-56 border-[3px] border-base-content bg-base-100 p-2 shadow-[5px_5px_0_0_var(--color-base-content)]">
-                {navigation.map((item) => {
+              <ul className="dropdown-content menu z-10 mt-3 w-56 neu-frame-md bg-base-100 p-2">
+                {siteNavigation.map((item) => {
                   const active = isActiveRoute(pathname, item.href);
 
                   return (
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className={active ? "menu-active bg-primary" : ""}
+                        className={cn(active && "menu-active")}
                         aria-current={active ? "page" : undefined}
                         onClick={(event) =>
                           event.currentTarget
@@ -61,7 +55,7 @@ export default function Header() {
                             ?.removeAttribute("open")
                         }
                       >
-                        {item.name}
+                        {item.label}
                       </Link>
                     </li>
                   );
@@ -74,7 +68,7 @@ export default function Header() {
               className="group flex items-center gap-3 font-bold tracking-tight"
               aria-label="Heon Heo, home"
             >
-              <span className="grid h-10 w-10 place-items-center border-[3px] border-base-content bg-secondary font-mono text-sm font-black text-secondary-content shadow-[3px_3px_0_0_var(--color-base-content)] transition-transform group-hover:-rotate-3">
+              <span className="grid h-10 w-10 place-items-center neu-frame-sm bg-secondary font-mono text-sm font-black text-secondary-content transition-transform group-hover:-rotate-3">
                 HH
               </span>
               <span className="hidden sm:inline">heonheo.com</span>
@@ -85,20 +79,20 @@ export default function Header() {
             className="navbar-center hidden lg:flex"
             aria-label="Primary navigation"
           >
-            <ul className="site-nav menu menu-horizontal gap-1 px-1 font-mono text-sm font-bold uppercase tracking-wider">
-              {navigation.map((item) => {
+            <ul className="menu menu-horizontal gap-1 px-1 font-heading text-sm font-black tracking-wider uppercase">
+              {siteNavigation.map((item) => {
                 const active = isActiveRoute(pathname, item.href);
 
                 return (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={
-                        active ? "menu-active bg-primary" : "hover:bg-base-200"
-                      }
+                      className={cn(
+                        active ? "menu-active" : "hover:bg-base-200",
+                      )}
                       aria-current={active ? "page" : undefined}
                     >
-                      {item.name}
+                      {item.label}
                     </Link>
                   </li>
                 );

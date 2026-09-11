@@ -1,6 +1,7 @@
 import type { FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ideaGraph } from "../../lib/models/graph";
+import IdeaFields from "../../components/IdeaFields";
 
 const Page = () => {
   const { id = "" } = useParams();
@@ -16,13 +17,13 @@ const Page = () => {
       originDate: Number(formData.get("originDate") ?? 0),
       updatedAt: new Date(),
     });
-    navigate(`/swe/ideagraph/${id}`);
+    navigate(`/projects/ideagraph/${id}`);
   };
 
   if (!idea) {
     return (
       <div className="flex min-h-screen justify-center font-sans">
-        <main className="flex w-full max-w-3xl flex-col py-4 px-8 md:px-4">
+        <main className="flex w-full max-w-3xl flex-col px-8 py-4 md:px-4">
           <h1 className="text-4xl font-bold text-error">Idea Not Found</h1>
           <p>No idea exists with ID: {id}</p>
         </main>
@@ -31,39 +32,17 @@ const Page = () => {
   }
 
   return (
-    <form
-      onSubmit={updateIdea}
-      className="flex flex-col mx-auto gap-4 w-full max-w-3xl"
-    >
+    <form onSubmit={updateIdea} className="form-shell">
       <fieldset className="fieldset w-full p-5">
         <legend className="fieldset-legend">Update Idea</legend>
-        <label className="input w-full">
-          <span className="label w-30">Name</span>
-          <input
-            type="text"
-            name="name"
-            defaultValue={idea.name ?? ""}
-            required
-          />
-        </label>
-        <label className="input w-full">
-          <span className="label w-30">Description</span>
-          <input
-            type="text"
-            name="description"
-            defaultValue={idea.description ?? ""}
-          />
-        </label>
-        <label className="input w-full">
-          <span className="label w-30">Origin Year</span>
-          <input
-            type="text"
-            name="originDate"
-            defaultValue={idea.originDate?.toString() ?? ""}
-            required
-          />
-        </label>
-        <button type="submit" className="btn btn-primary mt-4">
+        <IdeaFields
+          values={{
+            name: idea.name ?? "",
+            description: idea.description ?? "",
+            originDate: idea.originDate ?? "",
+          }}
+        />
+        <button type="submit" className="btn mt-4 btn-primary">
           Update the Idea
         </button>
       </fieldset>

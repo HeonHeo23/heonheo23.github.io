@@ -1,6 +1,7 @@
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { ideaGraph } from "@/app/swe/ideagraph/lib/models/graph";
+import IdeaRadioList from "../../components/IdeaRadioList";
 
 const Page = () => {
   const navigate = useNavigate();
@@ -15,47 +16,19 @@ const Page = () => {
       strength: Number(formData.get("strength") ?? 0.3),
       type: "",
     });
-    navigate("/swe/ideagraph");
+    navigate("/projects/ideagraph");
   };
 
   return (
-    <form
-      onSubmit={addInfluence}
-      className="flex flex-col mx-auto gap-4 w-full max-w-3xl"
-    >
+    <form onSubmit={addInfluence} className="form-shell">
       <fieldset className="fieldset w-full p-5">
         <legend className="fieldset-legend">New Influence</legend>
         <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col">
-            {ideas.map((i, idx) => (
-              <label
-                key={idx}
-                className="cursor-pointer flex items-center gap-2 font-mono text-sm"
-              >
-                <input
-                  type="radio"
-                  name="from"
-                  className="radio"
-                  value={i.id}
-                />
-                {i.name}
-              </label>
-            ))}
-          </div>
-          <div className="flex flex-col">
-            {ideas.map((i, idx) => (
-              <label
-                key={idx}
-                className="cursor-pointer flex items-center gap-2 font-mono text-sm"
-              >
-                <input type="radio" name="to" className="radio" value={i.id} />
-                {i.name}
-              </label>
-            ))}
-          </div>
+          <IdeaRadioList ideas={ideas} name="from" />
+          <IdeaRadioList ideas={ideas} name="to" />
         </div>
-        <div className="w-full mt-4">
-          <label className="">
+        <div className="mt-4 w-full">
+          <label>
             Strength
             <input
               type="range"
@@ -63,22 +36,22 @@ const Page = () => {
               min={0}
               max="1"
               defaultValue="1"
-              className="range range-accent w-full"
+              className="range w-full range-accent"
               step="0.1"
             />
-            <div className="flex justify-between px-2.5 mt-2 text-xs">
+            <div className="mt-2 flex justify-between px-2.5 text-xs">
               {[...Array(11)].map((_, i) => (
                 <span key={i}>|</span>
               ))}
             </div>
-            <div className="flex justify-between px-1 mt-2 text-xs">
+            <div className="mt-2 flex justify-between px-1 text-xs">
               {[...Array(11)].map((_, i) => (
                 <span key={i}>{(i / 10).toFixed(1)}</span>
               ))}
             </div>
           </label>
         </div>
-        <button type="submit" className="btn btn-primary mt-4">
+        <button type="submit" className="btn mt-4 btn-primary">
           Create Influence
         </button>
       </fieldset>

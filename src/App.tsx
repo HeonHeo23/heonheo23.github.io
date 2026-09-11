@@ -7,20 +7,24 @@ import BooksPage from "./app/books/page";
 import BookPage from "./app/books/[id]/page";
 import ResearchPage from "./app/research/page";
 import ResearchDetailPage from "./app/research/[slug]/page";
+import ProjectPage from "./app/project/page";
 import SwePage from "./app/swe/page";
+import SweNotePage from "./app/swe/[id]/page";
 import IdeaGraphPage from "./app/swe/ideagraph/page";
 import IdeaPage from "./app/swe/ideagraph/[id]/page";
 import EditIdeaPage from "./app/swe/ideagraph/edit/[id]/page";
 import InfluencePage from "./app/swe/ideagraph/influence/page";
 import AddInfluencePage from "./app/swe/ideagraph/influence/add/page";
 import IdeaGraphLayout from "./app/swe/ideagraph/layout";
+import NotFoundPage from "./app/components/NotFoundPage";
 
 const titles: Record<string, string> = {
   "/": "Heon Heo",
   "/compling": "Compling | Heon Heo",
   "/books": "Books | Heon Heo",
   "/research": "Research | Heon Heo",
-  "/swe": "Software | Heon Heo",
+  "/projects": "Projects | Heon Heo",
+  "/swe": "Software Notes | Heon Heo",
 };
 
 function PageMeta() {
@@ -33,9 +37,11 @@ function PageMeta() {
         ? "Reading Note | Heon Heo"
         : pathname.startsWith("/research/")
           ? "Research | Heon Heo"
-          : pathname.startsWith("/swe/")
-            ? "Software | Heon Heo"
-            : "Heon Heo");
+          : pathname.startsWith("/projects/")
+            ? "Projects | Heon Heo"
+            : pathname.startsWith("/swe/")
+              ? "Software Note | Heon Heo"
+              : "Heon Heo");
     window.scrollTo(0, 0);
   }, [pathname]);
 
@@ -52,17 +58,6 @@ function InLayout({
   return <Layout>{children}</Layout>;
 }
 
-function NotFound() {
-  return (
-    <main className="page-shell">
-      <h1 className="text-5xl font-black">Page not found</h1>
-      <p className="mt-4 text-base-content/70">
-        The requested page does not exist.
-      </p>
-    </main>
-  );
-}
-
 export default function App() {
   return (
     <RootLayout>
@@ -74,9 +69,11 @@ export default function App() {
         <Route path="/books/:id" element={<BookPage />} />
         <Route path="/research" element={<ResearchPage />} />
         <Route path="/research/:slug" element={<ResearchDetailPage />} />
+        <Route path="/projects" element={<ProjectPage />} />
         <Route path="/swe" element={<SwePage />} />
+        <Route path="/swe/:id" element={<SweNotePage />} />
         <Route
-          path="/swe/ideagraph"
+          path="/projects/ideagraph"
           element={
             <InLayout layout={IdeaGraphLayout}>
               <IdeaGraphPage />
@@ -84,7 +81,7 @@ export default function App() {
           }
         />
         <Route
-          path="/swe/ideagraph/influence"
+          path="/projects/ideagraph/influence"
           element={
             <InLayout layout={IdeaGraphLayout}>
               <InfluencePage />
@@ -92,7 +89,7 @@ export default function App() {
           }
         />
         <Route
-          path="/swe/ideagraph/influence/add"
+          path="/projects/ideagraph/influence/add"
           element={
             <InLayout layout={IdeaGraphLayout}>
               <AddInfluencePage />
@@ -100,7 +97,7 @@ export default function App() {
           }
         />
         <Route
-          path="/swe/ideagraph/edit/:id"
+          path="/projects/ideagraph/edit/:id"
           element={
             <InLayout layout={IdeaGraphLayout}>
               <EditIdeaPage />
@@ -108,14 +105,19 @@ export default function App() {
           }
         />
         <Route
-          path="/swe/ideagraph/:id"
+          path="/projects/ideagraph/:id"
           element={
             <InLayout layout={IdeaGraphLayout}>
               <IdeaPage />
             </InLayout>
           }
         />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={
+            <NotFoundPage title="Page not found" href="/" destination="home" />
+          }
+        />
       </Routes>
     </RootLayout>
   );

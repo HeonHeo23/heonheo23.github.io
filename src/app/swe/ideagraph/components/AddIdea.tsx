@@ -1,5 +1,7 @@
 "use client";
 
+import IdeaFields from "./IdeaFields";
+
 const AddIdea = ({
   createIdea,
 }: {
@@ -8,7 +10,7 @@ const AddIdea = ({
   return (
     <>
       <button
-        className="btn btn-primary mt-4 self-start"
+        className="btn mt-4 self-start btn-primary"
         onClick={() =>
           (
             document.getElementById("add-idea-modal") as HTMLDialogElement
@@ -19,42 +21,13 @@ const AddIdea = ({
       </button>
       <dialog id="add-idea-modal" className="modal">
         <div className="modal-box p-6 sm:p-8">
-          <form
-            action={createIdea}
-            className="flex flex-col mx-auto gap-4 w-full max-w-3xl"
-          >
+          <form action={createIdea} className="form-shell">
             <fieldset className="fieldset w-full p-5">
               <legend className="fieldset-legend">New Idea</legend>
-              <label className="input w-full">
-                <span className="label w-30">Name</span>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Example: Methodism"
-                  required
-                />
-              </label>
-              <label className="input w-full">
-                <span className="label w-30">Description</span>
-                <input
-                  type="text"
-                  name="description"
-                  placeholder="Short description..."
-                />
-              </label>
-              <label className="input w-full">
-                <span className="label w-30">Origin Year</span>
-                <input
-                  type="text"
-                  name="originDate"
-                  placeholder="Example: 1784"
-                  required
-                />
-              </label>
-              {/* <div className="modal-action"> */}
+              <IdeaFields />
               <button
                 type="submit"
-                className="btn btn-primary mt-2 self-start"
+                className="btn mt-2 self-start btn-primary"
                 onClick={() =>
                   (
                     document.getElementById(
@@ -65,7 +38,6 @@ const AddIdea = ({
               >
                 Create Idea
               </button>
-              {/* </div> */}
             </fieldset>
           </form>
         </div>

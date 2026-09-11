@@ -24,8 +24,12 @@ export default function ThemeToggle() {
 
   return (
     <div className="tooltip tooltip-left" data-tip="Toggle color theme">
-      <label className="swap swap-rotate btn btn-square bg-base-100">
+      <label
+        htmlFor="theme-toggle"
+        className="btn swap btn-square swap-rotate bg-base-100"
+      >
         <input
+          id="theme-toggle"
           ref={inputRef}
           type="checkbox"
           className="theme-controller"

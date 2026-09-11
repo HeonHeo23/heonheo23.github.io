@@ -1,16 +1,10 @@
 import Link from "../components/Link";
 import PageHeader from "../components/PageHeader";
+import { formatBookTitle } from "./utils";
 
 const bookModules = import.meta.glob("../../markdown/books/*.mdx", {
   eager: true,
 });
-
-function formatBookTitle(slug: string) {
-  return slug
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .replace(/[-_]+/g, " ")
-    .replace(/^./, (letter) => letter.toUpperCase());
-}
 
 const BooksPage = () => {
   const books = Object.keys(bookModules)
@@ -41,16 +35,17 @@ const BooksPage = () => {
             <li key={slug}>
               <Link
                 href={`/books/${slug}`}
-                className="card offset-card group min-h-56 transition-transform hover:-translate-y-1"
+                className="group card flex min-h-56 neu-card flex-col p-6"
               >
-                <div className="card-body p-6">
-                  <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-widest text-base-content/50">
-                    <span className="badge badge-outline rounded-none px-3 py-3">
-                      Reading note
-                    </span>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                  </div>
-                  <h3 className="card-title mt-auto pt-10 text-2xl tracking-tight group-hover:text-primary sm:text-3xl">
+                <div className="flex min-w-0 flex-wrap items-start justify-between gap-4">
+                  <span className="tag badge-outline">Reading note</span>
+                  <span className="eyebrow text-sm text-base-content/50">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <div className="mt-auto pt-12">
+                  <h3 className="text-2xl tracking-tight group-hover:text-secondary sm:text-3xl">
                     {formatBookTitle(slug)} <span aria-hidden="true">↗</span>
                   </h3>
                 </div>

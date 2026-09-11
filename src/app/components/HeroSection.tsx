@@ -17,20 +17,20 @@ function ArrowIcon() {
 
 export default function HeroSection() {
   return (
-    <section className="hero relative my-8 min-h-[calc(100svh-6rem)] border-[4px] border-base-content bg-primary shadow-[12px_12px_0_0_var(--color-base-content)]">
-      <div className="hero-content grid w-full max-w-none gap-12 p-6 py-12 sm:p-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:p-16 lg:py-20">
+    <section className="relative hero my-8 min-h-[calc(100svh-6rem)] neu-frame-xl bg-primary">
+      <div className="hero-content grid w-full gap-12 p-6 py-12 sm:p-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:p-16 lg:py-20">
         <div className="relative z-10">
-          <div className="mb-6 inline-flex items-center gap-3 border-[3px] border-base-content bg-base-100 px-3 py-2 text-base-content shadow-[3px_3px_0_0_var(--color-base-content)]">
-            <span className="h-2 w-2 animate-pulse bg-secondary" />
+          <div className="mb-6 inline-flex items-center gap-3 neu-frame-sm bg-base-100 px-3 py-2 text-base-content">
+            <span className="h-2 w-2 animate-pulse bg-accent" />
             <span className="eyebrow">Computer Engineering · UF &apos;28</span>
           </div>
 
-          <h1 className="font-display max-w-4xl text-[clamp(4.75rem,16vw,10rem)] font-extrabold leading-[0.72] tracking-[-0.085em] text-base-content">
+          <h1 className="max-w-4xl font-display text-[clamp(3.75rem,16vw,10rem)] leading-[0.72] font-extrabold tracking-[-0.085em] whitespace-nowrap text-primary-content">
             Heon
             <span className="block text-secondary">Heo.</span>
           </h1>
 
-          <p className="mt-10 max-w-2xl text-xl font-medium leading-relaxed text-base-content/75 sm:text-2xl">
+          <p className="mt-10 max-w-2xl text-xl leading-relaxed font-medium text-primary-content/75 sm:text-2xl">
             I build software and explore the connections between language,
             ideas, and complex systems.
           </p>
@@ -41,13 +41,13 @@ export default function HeroSection() {
             aria-label="Explore portfolio"
           >
             <Link
-              href="/swe"
-              className="btn bg-base-content px-6 text-base-100"
+              href="/projects"
+              className="btn bg-base-content text-base-100"
             >
               Explore software
               <ArrowIcon />
             </Link>
-            <Link href="/books" className="btn btn-outline px-6">
+            <Link href="/books" className="btn btn-outline">
               Read notes
             </Link>
           </div>
@@ -57,37 +57,39 @@ export default function HeroSection() {
           className="relative mx-auto hidden h-[28rem] w-full max-w-xs lg:block"
           aria-hidden="true"
         >
-          <div className="absolute right-0 top-3 w-56 rotate-6 border-[3px] border-base-content bg-base-content text-base-100 shadow-[8px_8px_0_0_var(--color-base-content)]">
-            <div className="flex items-center justify-between border-b-[3px] border-base-100 px-3 py-2 font-mono text-[0.6rem] font-black uppercase tracking-widest">
+          <div className="absolute top-3 right-0 w-56 rotate-6 neu-frame-lg bg-base-100 text-base-content">
+            <div className="flex items-center justify-between border-b-3 border-base-content px-3 py-2 font-mono text-[0.6rem] font-black tracking-widest uppercase">
               <span>terminal</span>
-              <span aria-hidden="true">● ● ●</span>
+              <span className="inline-flex gap-1" aria-hidden="true">
+                <span className="text-error">●</span>
+                <span className="text-warning">●</span>
+                <span className="text-success">●</span>
+              </span>
             </div>
-            <div className="p-4 font-mono text-xs font-bold leading-relaxed">
+            <div className="p-4 font-mono text-xs leading-relaxed font-bold">
               <p>
-                <span className="text-base-100/60">$</span> npm run build
+                <span className="text-base-content/60">$</span> npm run build
               </p>
               <p className="mt-2">compiled successfully</p>
-              <p className="mt-2 text-base-100/60">→ 0 errors</p>
+              <p className="mt-2 text-base-content/60">→ 0 errors</p>
             </div>
           </div>
 
-          <div className="absolute left-1 top-36 grid h-48 w-48 -rotate-6 place-items-center border-[3px] border-base-content bg-accent text-accent-content shadow-[8px_8px_0_0_var(--color-base-content)]">
+          <div className="absolute top-36 left-1 grid h-48 w-48 -rotate-6 place-items-center neu-frame-lg bg-accent tracking-tighter text-accent-content">
             <div className="text-center">
-              <div className="font-mono text-5xl font-black leading-none">
-                &lt;AI/&gt;
-              </div>
-              <div className="mt-3 border-t-[3px] border-accent-content/50 pt-2 font-mono text-[0.6rem] font-black uppercase tracking-[0.25em]">
+              <div className="font-mono text-5xl font-black">&lt;AI/&gt;</div>
+              <div className="mt-3 border-t-3 border-accent-content/50 pt-2 font-mono text-[0.6rem] font-black tracking-[0.25em] uppercase">
                 LLM / NLP / Optimization
               </div>
             </div>
           </div>
 
-          <div className="absolute bottom-1 right-4 grid h-32 w-44 rotate-3 place-items-center border-[3px] border-base-content bg-secondary text-secondary-content shadow-[6px_6px_0_0_var(--color-base-content)]">
+          <div className="absolute right-4 bottom-1 grid h-32 w-44 rotate-3 place-items-center neu-frame-lg bg-secondary text-secondary-content">
             <div className="text-center font-mono font-black">
               <div className="text-3xl leading-none tracking-[0.3em]">
                 ✦0101
               </div>
-              <div className="mt-2 text-[0.6rem] uppercase tracking-[0.25em]">
+              <div className="mt-2 text-[0.6rem] tracking-[0.25em] uppercase">
                 embedded systems
               </div>
             </div>

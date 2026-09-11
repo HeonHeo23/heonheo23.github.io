@@ -9,7 +9,7 @@ const IdeaList = ({
   deleteIdea: (id: string) => void;
 }) => {
   return (
-    <ul className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4">
+    <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4">
       {ideas.map((i) => (
         <li key={i.id}>
           <IdeaCard idea={i} deleteIdea={deleteIdea} />

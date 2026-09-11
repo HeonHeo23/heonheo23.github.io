@@ -1,5 +1,7 @@
 import Link from "./Link";
-import { neuToneClass, type NeuTone } from "./design";
+import SectionIntro from "./SectionIntro";
+import { cn } from "./cn";
+import { badgeToneClass, type NeuTone } from "./design";
 
 type Highlight = {
   category: "Research" | "Experience" | "Education";
@@ -105,7 +107,7 @@ const highlights: Highlight[] = [
     title: "B.S. in Computer Engineering",
     company: "University of Florida",
     meta: "Minor in Linguistics · 3.81 GPA",
-    year: "AUG 2022 — MAY 2028",
+    year: "MAY 2028",
     short: "",
     details: [
       "Build a foundation in computer engineering through coursework spanning software, hardware, and systems design.",
@@ -120,14 +122,14 @@ function ExperienceDialog({ item }: { item: Highlight }) {
   return (
     <dialog id={dialogId} className="modal">
       <div className="modal-box max-w-2xl p-6 sm:p-8">
-        <div className="flex items-start justify-between gap-6 border-b-[3px] border-base-content pb-5">
+        <div className="flex min-w-0 flex-wrap items-start justify-between gap-6 border-b-3 border-base-content pb-5">
           <div>
             <p className="eyebrow text-secondary">{item.title}</p>
             <h3 className="mt-2 text-3xl font-black tracking-tight">
               {item.company}
             </h3>
           </div>
-          <span className="font-mono text-right text-xs font-black uppercase text-base-content/60">
+          <span className="text-right date text-base-content/60">
             {item.year}
           </span>
         </div>
@@ -138,7 +140,7 @@ function ExperienceDialog({ item }: { item: Highlight }) {
           {item.short}
         </p>
         <div className="mt-6">
-          <p className="eyebrow mb-3 text-secondary">Details</p>
+          <p className="mb-3 eyebrow text-secondary">Details</p>
           <ul className="space-y-3 leading-relaxed text-base-content/80">
             {(item.details ?? [item.short]).map((detail) => (
               <li key={detail}>— {detail}</li>
@@ -147,10 +149,10 @@ function ExperienceDialog({ item }: { item: Highlight }) {
         </div>
         {item.skills ? (
           <div className="mt-6">
-            <p className="eyebrow mb-3 text-secondary">Skills</p>
-            <div className="flex flex-wrap gap-2">
+            <p className="eyebrow text-secondary">Skills</p>
+            <div className="mt-3 tag-list">
               {item.skills.map((skill) => (
-                <span key={skill} className="badge badge-outline">
+                <span key={skill} className="tag badge-outline">
                   {skill}
                 </span>
               ))}
@@ -179,21 +181,21 @@ function HighlightGrid({ items }: { items: Highlight[] }) {
           const content = (
             <>
               <div className="card-body p-6">
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex min-w-0 flex-wrap items-start justify-between gap-4">
                   <span
-                    className={`badge px-3 py-3 text-[0.65rem] uppercase tracking-widest ${neuToneClass[item.tone]}`}
+                    className={cn("tag-compact", badgeToneClass[item.tone])}
                   >
                     {item.category}
                   </span>
-                  <span className="font-mono text-right text-xs font-black uppercase text-base-content/55">
+                  <span className="text-right date text-base-content/55">
                     {item.year}
                   </span>
                 </div>
                 <div className="mt-auto pt-8">
-                  <div className="font-mono text-xs font-bold uppercase tracking-wider text-base-content/65">
+                  <div className="eyebrow text-base-content/65">
                     {item.title}
                   </div>
-                  <h3 className="card-title mt-2 text-2xl leading-tight transition-colors group-hover:text-secondary">
+                  <h3 className="mt-2 card-title text-2xl leading-tight transition-colors group-hover:text-secondary">
                     {item.company}
                   </h3>
                   <div className="mt-3 border-t-2 border-base-content/25 pt-3">
@@ -213,16 +215,13 @@ function HighlightGrid({ items }: { items: Highlight[] }) {
           return (
             <li key={`${item.company}-${item.title}`}>
               {item.category === "Research" && item.href ? (
-                <Link
-                  href={item.href}
-                  className="card offset-card group min-h-64"
-                >
+                <Link href={item.href} className="group card min-h-64 neu-card">
                   {content}
                 </Link>
               ) : (
                 <button
                   type="button"
-                  className="card offset-card group min-h-64 w-full text-left"
+                  className="group card min-h-64 w-full neu-card text-left"
                   onClick={() =>
                     (
                       document.getElementById(dialogId) as HTMLDialogElement
@@ -252,47 +251,30 @@ export default function FeatureSection() {
   return (
     <>
       <section
-        className="border-t-[4px] border-base-content py-16 sm:py-24"
+        className="border-t-4 border-base-content py-16 sm:py-24"
         aria-labelledby="experience-heading"
       >
-        <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-          <div>
-            <p className="eyebrow mb-3 text-secondary">Experience</p>
-            <h2
-              id="experience-heading"
-              className="max-w-2xl text-4xl font-black tracking-tight sm:text-6xl"
-            >
-              Learning by building.
-            </h2>
-          </div>
-          <p className="max-w-sm text-base-content/75 sm:text-right">
-            Education, engineering, and interdisciplinary project work.
-          </p>
-        </div>
+        <SectionIntro
+          eyebrow="Experience"
+          eyebrowClassName="text-secondary"
+          title="Learning by building."
+          titleId="experience-heading"
+          description="Education, engineering, and interdisciplinary project work."
+          descriptionClassName="text-base-content/75"
+        />
         <HighlightGrid items={experience} />
       </section>
       <section
-        className="-mx-5 border-y-[4px] border-base-content bg-accent px-5 py-16 sm:-mx-8 sm:px-8 sm:py-24"
+        className="-mx-5 border-y-4 border-base-content bg-accent px-5 py-16 sm:-mx-8 sm:px-8 sm:py-24"
         aria-labelledby="projects-heading"
       >
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-            <div>
-              <p className="eyebrow mb-3">Research</p>
-              <h2
-                id="projects-heading"
-                className="max-w-2xl text-4xl font-black tracking-tight sm:text-6xl"
-              >
-                Selected projects
-              </h2>
-            </div>
-            <p className="max-w-sm sm:text-right">
-              Computer science research applying machine learning, computer
-              vision, and computational optimization.
-            </p>
-          </div>
-          <HighlightGrid items={projects} />
-        </div>
+        <SectionIntro
+          eyebrow="Research"
+          title="Selected projects"
+          titleId="projects-heading"
+          description="Computer science research applying machine learning, computer vision, and computational optimization."
+        />
+        <HighlightGrid items={projects} />
       </section>
     </>
   );

@@ -36,8 +36,8 @@ const Page = () => {
       />
       <AddIdea createIdea={addIdea} />
       <Link
-        href="/swe/ideagraph/influence"
-        className="btn btn-accent mt-4 self-start"
+        href="/projects/ideagraph/influence"
+        className="btn mt-4 self-start btn-accent"
       >
         Influences
       </Link>

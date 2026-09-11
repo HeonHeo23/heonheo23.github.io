@@ -10,18 +10,15 @@ const Page = () => {
         title="Compling projects."
         description="Working notes on computational linguistics, semantics, and historical narrative."
       >
-        <ul className="flex max-w-md flex-wrap gap-2 font-mono text-xs font-bold uppercase tracking-wider">
+        <ul className="tag-list max-w-md">
           {[
             "Koine Greek",
             "Semantics",
             "Vector context",
             "Translation issues",
           ].map((topic) => (
-            <li
-              key={topic}
-              className="badge badge-outline rounded-none px-3 py-3"
-            >
-              {topic}
+            <li key={topic}>
+              <span className="tag badge badge-outline">{topic}</span>
             </li>
           ))}
         </ul>
@@ -31,7 +28,7 @@ const Page = () => {
         <article className="article-content">
           <Proposal />
         </article>
-        <div className="divider divider-primary my-16 font-mono text-xs font-bold uppercase tracking-widest">
+        <div className="divider my-16 divider-primary eyebrow">
           Next proposal
         </div>
         <article className="article-content">

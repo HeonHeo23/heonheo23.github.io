@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import Breadcrumbs, { type BreadcrumbItem } from "./Breadcrumbs";
+import { cn } from "./cn";
 
 type PageHeaderProps = {
   eyebrow: string;
@@ -6,6 +8,7 @@ type PageHeaderProps = {
   description: string;
   children?: ReactNode;
   className?: string;
+  breadcrumbs?: BreadcrumbItem[];
 };
 
 export default function PageHeader({
@@ -13,18 +16,14 @@ export default function PageHeader({
   title,
   description,
   children,
-  className = "mb-16",
+  className,
+  breadcrumbs,
 }: PageHeaderProps) {
   return (
-    <header className={`neu-page-header ${className}`}>
-      <nav
-        className="breadcrumbs eyebrow mb-4 text-primary"
-        aria-label="Breadcrumb"
-      >
-        <ul>
-          <li aria-current="page">{eyebrow}</li>
-        </ul>
-      </nav>
+    <header
+      className={cn("mb-16 border-b-4 border-base-content pb-12", className)}
+    >
+      <Breadcrumbs items={breadcrumbs ?? [{ label: eyebrow }]} />
       <div className="grid gap-8 lg:gap-12">
         <h1 className="text-5xl font-black tracking-tight sm:text-7xl">
           {title}

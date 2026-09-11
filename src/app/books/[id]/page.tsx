@@ -1,6 +1,8 @@
 import type { ComponentType } from "react";
 import { useParams } from "react-router-dom";
-import Link from "../../components/Link";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import NotFoundPage from "../../components/NotFoundPage";
+import { formatBookTitle } from "../utils";
 
 const bookModules = import.meta.glob<{ default: ComponentType }>(
   "../../../markdown/books/*.mdx",
@@ -15,31 +17,28 @@ const Page = () => {
 
   if (!BookMdx) {
     return (
-      <main className="page-shell">
-        <h1 className="text-5xl font-black">Reading note not found</h1>
-        <Link href="/books" className="link mt-6 inline-block text-primary">
-          Back to books
-        </Link>
-      </main>
+      <NotFoundPage
+        title="Reading note not found"
+        href="/books"
+        destination="books"
+      />
     );
   }
 
   return (
     <main className="page-shell">
       <div className="article-content">
-        <nav
-          className="breadcrumbs mb-10 border-b-2 border-base-content pb-5 font-mono text-xs font-bold uppercase tracking-widest"
-          aria-label="Breadcrumb"
-        >
-          <ul>
-            <li>
-              <Link href="/books" className="link-hover text-primary">
-                Books
-              </Link>
-            </li>
-            <li className="text-base-content/60">Reading note</li>
-          </ul>
-        </nav>
+        <Breadcrumbs
+          items={[
+            {
+              label: "Books",
+              href: "/books",
+            },
+            {
+              label: formatBookTitle(id ?? ""),
+            },
+          ]}
+        />
         <article>
           <BookMdx />
         </article>

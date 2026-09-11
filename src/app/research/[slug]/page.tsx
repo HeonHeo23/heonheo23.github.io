@@ -1,6 +1,43 @@
 import { useParams } from "react-router-dom";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import Link from "../../components/Link";
-import { papers } from "../data";
+import NotFoundPage from "../../components/NotFoundPage";
+import { papers, type ResearchPaper } from "../data";
+
+function PaperMetadata({ paper }: { paper: ResearchPaper }) {
+  const fields = [
+    ["Published", paper.publishedDate],
+    ["Venue", paper.venue],
+    ["Volume", `Vol. ${paper.volume}`],
+    ["Article / paper number", paper.identifier],
+    ["Pages", paper.pages ? `pp. ${paper.pages}` : "Not applicable"],
+    ["Publisher", paper.publisher],
+  ];
+
+  return (
+    <dl className="mb-10 grid gap-[3px] border-3 border-base-content bg-base-content font-mono text-sm sm:grid-cols-2">
+      {fields.map(([label, value]) => (
+        <div key={label} className="bg-base-100 p-4">
+          <dt className="eyebrow text-secondary">{label}</dt>
+          <dd className="mt-2">{value}</dd>
+        </div>
+      ))}
+      <div className="bg-base-100 p-4 sm:col-span-2">
+        <dt className="eyebrow text-secondary">DOI</dt>
+        <dd className="mt-2">
+          <Link
+            href={paper.href}
+            target="_blank"
+            rel="noreferrer"
+            className="link text-accent link-hover"
+          >
+            {paper.doi}
+          </Link>
+        </dd>
+      </div>
+    </dl>
+  );
+}
 
 export default function ResearchDetailPage() {
   const { slug } = useParams();
@@ -8,53 +45,40 @@ export default function ResearchDetailPage() {
 
   if (!paper) {
     return (
-      <main className="page-shell">
-        <h1 className="text-5xl font-black">Research paper not found</h1>
-        <Link href="/research" className="link mt-6 inline-block text-primary">
-          Back to research
-        </Link>
-      </main>
+      <NotFoundPage
+        title="Research paper not found"
+        href="/research"
+        destination="research"
+      />
     );
   }
 
   return (
     <main className="page-shell">
-      <nav
-        className="breadcrumbs eyebrow mb-10 w-full text-primary"
-        aria-label="Breadcrumb"
-      >
-        <ul className="flex w-full min-w-0">
-          <li className="shrink-0">
-            <Link href="/research">Research</Link>
-          </li>
-          <li
-            className="min-w-0 flex-1"
-            aria-current="page"
-            title={paper.title}
-          >
-            <span className="block! w-full overflow-hidden text-ellipsis whitespace-nowrap">
-              {paper.title}
-            </span>
-          </li>
-        </ul>
-      </nav>
-
+      <Breadcrumbs
+        items={[
+          { label: "Research", href: "/research", className: "shrink-0" },
+          {
+            label: paper.title,
+            className: "min-w-0 flex-1",
+            labelClassName: "block! w-full truncate",
+          },
+        ]}
+      />
       <article className="article-content">
-        <div className="mb-10 border-b-[4px] border-base-content pb-10">
-          <div className="flex flex-wrap gap-2">
-            <span className="badge badge-primary rounded-none font-mono font-bold uppercase tracking-wider">
-              {paper.type}
-            </span>
+        <div className="mb-10 border-b-4 border-base-content pb-10">
+          <div className="tag-list">
+            <span className="tag badge-primary">{paper.type}</span>
             {paper.tags.map((tag) => (
-              <span key={tag} className="badge badge-outline rounded-none">
+              <span key={tag} className="tag badge-outline">
                 {tag}
               </span>
             ))}
           </div>
-          <p className="mt-6 font-mono text-sm font-bold uppercase tracking-wider text-primary">
+          <p className="mt-6 eyebrow text-sm text-secondary">
             {paper.published}
           </p>
-          <h1 className="mt-4 text-4xl font-black leading-tight tracking-tight sm:text-6xl">
+          <h1 className="mt-4 text-4xl leading-tight font-black tracking-tight sm:text-6xl">
             {paper.title}
           </h1>
           <p className="mt-6 font-mono text-sm leading-relaxed text-base-content/65">
@@ -73,66 +97,19 @@ export default function ResearchDetailPage() {
           </p>
         </div>
 
-        <dl className="mb-10 grid gap-[3px] border-[3px] border-base-content bg-base-content sm:grid-cols-2">
-          <div className="bg-base-100 p-4">
-            <dt className="eyebrow text-primary">Published</dt>
-            <dd className="mt-2 font-mono text-sm font-bold">
-              {paper.publishedDate}
-            </dd>
-          </div>
-          <div className="bg-base-100 p-4">
-            <dt className="eyebrow text-primary">Venue</dt>
-            <dd className="mt-2 font-mono text-sm font-bold">{paper.venue}</dd>
-          </div>
-          <div className="bg-base-100 p-4">
-            <dt className="eyebrow text-primary">Volume</dt>
-            <dd className="mt-2 font-mono text-sm font-bold">
-              Vol. {paper.volume}
-            </dd>
-          </div>
-          <div className="bg-base-100 p-4">
-            <dt className="eyebrow text-primary">Article / paper number</dt>
-            <dd className="mt-2 font-mono text-sm font-bold">
-              {paper.identifier}
-            </dd>
-          </div>
-          <div className="bg-base-100 p-4">
-            <dt className="eyebrow text-primary">Pages</dt>
-            <dd className="mt-2 font-mono text-sm font-bold">
-              {paper.pages ? `pp. ${paper.pages}` : "Not applicable"}
-            </dd>
-          </div>
-          <div className="bg-base-100 p-4">
-            <dt className="eyebrow text-primary">Publisher</dt>
-            <dd className="mt-2 font-mono text-sm font-bold">
-              {paper.publisher}
-            </dd>
-          </div>
-          <div className="bg-base-100 p-4 sm:col-span-2">
-            <dt className="eyebrow text-primary">DOI</dt>
-            <dd className="mt-2 font-mono text-sm font-bold">
-              <Link
-                href={paper.href}
-                target="_blank"
-                rel="noreferrer"
-                className="link link-hover text-primary"
-              >
-                {paper.doi}
-              </Link>
-            </dd>
-          </div>
-        </dl>
+        <PaperMetadata paper={paper} />
 
         <section aria-labelledby="abstract-heading">
-          <p id="abstract-heading" className="eyebrow mb-6 text-primary">
+          <p
+            id="abstract-heading"
+            className="mb-6 eyebrow text-lg text-secondary"
+          >
             Abstract
           </p>
           <div className="space-y-8">
             {Object.entries(paper.abstractSections).map(([label, text]) => (
               <div key={label}>
-                <h2 className="font-mono text-sm font-black uppercase tracking-widest">
-                  {label}
-                </h2>
+                <h2 className="eyebrow text-sm">{label}</h2>
                 <p className="mt-2 text-lg leading-relaxed text-base-content/80">
                   {text}
                 </p>
@@ -141,12 +118,12 @@ export default function ResearchDetailPage() {
           </div>
         </section>
 
-        <div className="card-actions mt-10">
+        <div className="mt-10 card-actions flex-wrap">
           <Link
             href={paper.href}
             target="_blank"
             rel="noreferrer"
-            className="btn btn-primary rounded-none border-2 border-base-content"
+            className="btn border-2 btn-primary"
           >
             Read paper ↗
           </Link>
@@ -154,7 +131,7 @@ export default function ResearchDetailPage() {
             href={paper.href}
             target="_blank"
             rel="noreferrer"
-            className="link link-hover self-center font-mono text-sm text-primary"
+            className="min-w-0 link self-center font-mono text-sm break-all link-accent link-hover"
           >
             DOI: {paper.doi}
           </Link>

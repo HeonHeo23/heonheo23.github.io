@@ -1,0 +1,37 @@
+# Back to Top
+
+The control stays hidden until the visitor has scrolled 320px, then returns the page to the beginning with motion-aware behavior.
+
+## useEffect
+
+`useEffect` synchronizes the component with the browser after rendering. It attaches the scroll listener when the component mounts or the route changes, then returns a cleanup function that removes the listener before the effect runs again or unmounts.
+
+## Event mechanism
+
+When the component mounts `useEffect` checks the current `window.scrollY` and registers a passive `scroll` listener.
+
+Each scroll event compares the current position with the threshold (320px) and updates the button's `isVisible` React state. The state controls opacity, visibility, pointer events, keyboard focus, and `aria-hidden`. The effect removes its listener before rerunning or unmounting, preventing duplicate handlers.
+
+On click, the button releases focus before calling `window.scrollTo`. The next scroll events reaches below the threshold and hides a focused control could otherwise interrupt the scroll.
+
+The browser uses an immediate jump when reduced motion is preferred.
+
+```text
+[mount / route change] --> [attach passive scroll listener]
+                                  |
+                                  v
+                           [scroll event]
+                                  |
+                                  v
+                       [scrollY > threshold?]
+                         /             \
+                       no               yes
+                       |                 |
+                       v                 v
+                   [hidden]         [visible button]
+                                         |
+                                       click
+                                         |
+                                         v
+                            [blur button + scrollTo(0)]
+```
